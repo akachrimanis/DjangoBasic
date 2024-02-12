@@ -28,7 +28,7 @@ class {model_name}(models.Model):\n"""
     fieldtypes_libraries = fieldtypes_libraries[:-1] + ")\n\n"
     print(variable_types)
     # add the variables with their parameters
-    parameter_vars = ['ForeignKey', 'through', 'parent_link', 'related_name', 'related_query_name', 'on_delete', 'primary_key', 'max_length', 'unique', 'blank', 'null', 'default', 'auto_now_add', 'auto_now']
+    parameter_vars = ['ForeignKey', 'through', 'parent_link', 'related_name', 'related_query_name', 'on_delete', 'primary_key', 'max_length', 'unique', 'blank', 'null', 'default', 'auto_now_add', 'auto_now','verbose_name']
     model_definitions = ""
     for i in df.index:
         var_name = df.loc[i, "Variable"]
@@ -42,7 +42,7 @@ class {model_name}(models.Model):\n"""
                 param_context = False
             if str(param_context) !=  "nan":
                 model_variable_definition += f"{p}={param_context},"
-        model_variable_definition += "),\n"
+        model_variable_definition += ")\n"
         model_definitions += model_variable_definition
     model_definitions = fieldtypes_libraries + model_content + model_definitions
     return model_definitions 

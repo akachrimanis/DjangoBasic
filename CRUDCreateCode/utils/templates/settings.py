@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import django
-django.setup()
+#import django
+#django.setup()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-bm)sn&2^=4%(5b22s$w_fxcz$+t_50r3_-!2&(_l9p&rsdvk-a'
+SECRET_KEY = 'django-insecure-m=8ln*v$k7)-d18n=+!k(g4o)@k5m#wuknvjw^t-of*g%m65iq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -33,24 +34,17 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    #'Customer',
+    'rest_framework',
+    'crispy_forms',
+    'corsheaders',
+    'Customer',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
-    'crispy_forms',
-    'corsheaders',
     'debug_toolbar',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.account.auth_backends.AuthenticationBackend',
-    'index.apps.IndexConfig',
-    'account.apps.AccountConfig',
-    'community.apps.CommunityConfig',
     'django_filters',
     
 ]
@@ -63,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -70,7 +65,7 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [os.path.join(BASE_DIR,'templates'),os.path.join(BASE_DIR,'templates','Customer')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,11 +127,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # If STATICFILES_DIRS is not defined, add it
 STATICFILES_DIRS = [
     BASE_DIR / 'mystaticfiles',  # Adjust the path to match your structure
 ]
+
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
