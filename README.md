@@ -49,10 +49,10 @@ export PATH="/Users/tkax/dev/aimonetize/DjangoBasic/myenv/bin:$PATH"
 pip install --upgrade pip
 pip install django djangorestframework
 pip install pandas openpyxl numpy jupyterlab
-pip install Pillow celery redis django-debug-toolbar django-allauth django-cors-headers django-filter django-crispy-forms djangorestframework-simplejwt
+pip install celery redis django-debug-toolbar django-allauth django-cors-headers django-filter django-crispy-forms djangorestframework-simplejwt
 
 django-admin startproject backend
-python3 manage.py startapp testapp
+python3 manage.py startapp Customer
 python3 manage.py migrate
 python3 manage.py createsuperuser
 user=tkax
@@ -90,14 +90,18 @@ The steps to follow to achieve that are the following:
   - Read the model template file for each model. 
   - transform the xls file into pandas dataframe
   - assign variables accordingly for all parameters
-  - create text for the model
+  - create text for the models.py
   - create the folder structure - run the createapp script for teh specific model and teh folder structure is created automatically
+  - copy the boilerplate files accordingly
+    - style.css
+    - settings.py
+    - urls.py
   - Create the necessary files (if not existing)
     - forms.py
     - urls.py
     - serializers.py
-    - signals.py
-    - celery.py
+    - signals.py -TODO
+    - celery.py -TODO
   - add model into settings.py
   - add configuration of router in urls(the main url in the main app folder backend/urls.py)
   - Make migrations
