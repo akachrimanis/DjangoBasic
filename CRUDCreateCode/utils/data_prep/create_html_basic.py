@@ -11,8 +11,8 @@ def create_list_html(df, model_name):
     {{%  for {model_name.lower()} in {model_name.lower()}s %}} 
     <li>
         {{{{ {model_name.lower()}.name }}}} ({{{{ {model_name.lower()}.email }}}} )
-        <a href="{{%  url '{model_name.lower()}_update' {model_name.lower()}.id %}} ">Edit</a>
-        <a href="{{% url '{model_name.lower()}_delete' {model_name.lower()}.id %}} ">Delete</a>
+        <a href="{{%  url '{model_name.lower()}-update' {model_name.lower()}.id %}} ">Edit</a>
+        <a href="{{% url '{model_name.lower()}-delete' {model_name.lower()}.id %}} ">Delete</a>
     </li>
     {{%  endfor %}} 
 </ul>
@@ -34,7 +34,7 @@ def create_create_html(df, model_name):
     {{{{ form.as_p }}}}
     <button type="submit">Submit</button>
 </form>
-<a href="{{% url '{model_name.lower()}_list' %}} ">Back to list</a>
+<a href="{{% url '{model_name.lower()}-list' %}} ">Back to list</a>
 {{% endblock %}} 
 """
     return html_content
@@ -50,7 +50,7 @@ def create_update_html(df, model_name):
     {{{{ form.as_p }}}}
     <button type="submit">Submit</button>
 </form>
-<a href="{{% url '{model_name.lower()}_list' %}} ">Back to list</a>
+<a href="{{% url '{model_name.lower()}-list' %}} ">Back to list</a>
 {{% endblock %}} 
 """
     return html_content
@@ -68,7 +68,7 @@ def create_delete_html(df, model_name):
     {{% csrf_token %}} 
     <button type="submit">Yes, delete</button>
 </form>
-<a href="{{% url '{model_name.lower()}_list' %}} ">Cancel</a>
+<a href="{{% url '{model_name.lower()}-list' %}} ">Cancel</a>
 {{% endblock %}} 
 """
     return html_content
@@ -102,7 +102,7 @@ def create_confirm_delete_html(df, model_name):
     df = df.astype(str)
     
     html_content = f"""
-     <!-- {model_name.lower()}_confirm_delete.html -->
+     <!-- {model_name.lower()}-confirm-delete.html -->
    {{% extends 'base.html' %}} 
    {{% block content %}} \n
 <div class="container mt-5">
@@ -110,7 +110,6 @@ def create_confirm_delete_html(df, model_name):
     <p>Are you sure you want to delete the {model_name.lower()} with ID {{ {model_name.lower()}.id }}?</p>
     <form method="post">
         {{% csrf_token %}}
-
         <button type="submit" class="btn btn-danger">Delete</button>
         <a href="{{% url '{model_name.lower()}-list' %}}" class="btn btn-primary">Cancel</a>
     </form>

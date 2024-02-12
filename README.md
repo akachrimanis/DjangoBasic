@@ -1,7 +1,8 @@
 # DjangoBasic
 This is a basic Django App used for  training, testing and iterating on ideas with colleagues of AIMONETIZE initiative
 
-
+# TODO
+- add django channels and asynchronous communication with websockets
 # Overview
 The structure of this app is:
 - Basic software installation
@@ -49,8 +50,8 @@ export PATH="/Users/tkax/dev/aimonetize/DjangoBasic/myenv/bin:$PATH"
 pip install --upgrade pip
 pip install django djangorestframework
 pip install pandas openpyxl numpy jupyterlab
-pip install celery redis django-debug-toolbar django-allauth django-cors-headers django-filter django-crispy-forms djangorestframework-simplejwt
-
+pip install celery django-debug-toolbar django-allauth django-cors-headers django-filter django-crispy-forms djangorestframework-simplejwt
+pip install channels redis # asynchronous/ websockets
 django-admin startproject backend
 python3 manage.py startapp Customer
 python3 manage.py migrate

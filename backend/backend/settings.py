@@ -35,9 +35,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'rest_framework',
+    'Customer',
     'crispy_forms',
     'corsheaders',
-    'Customer',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

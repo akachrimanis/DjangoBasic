@@ -16,7 +16,7 @@ from utils.data_prep.create_forms import create_forms
 from utils.data_prep.create_html_basic import create_list_html,create_create_html, create_update_html, create_delete_html, create_detail_html, create_confirm_delete_html, create_form_html
 from utils.data_prep.find_model_names import get_file_names
 from utils.data_prep.create_settings import replace_settings_file
-
+from utils.data_prep.create_admin import create_admin
 from utils.dataIO.read_settings_xlsx import read_excel_to_dataframe
 from utils.dataIO.read_model_xlsx import read_excel_sheets 
 from utils.dataIO.save_serializer_template import save_serializers_py
@@ -25,6 +25,7 @@ from utils.dataIO.save_views_template import save_views_py
 from utils.dataIO.save_urls_template import save_urls_py
 from utils.dataIO.save_forms_template import save_forms_py
 from utils.dataIO.save_html_template import save_html_template
+from utils.dataIO.save_admin import save_admin_py
 
 print("INPUT_PATH_MODELS" + BASIC_PATH, "\nINPUT_PATH_SETTINGS" + INPUT_PATH_SETTINGS, "\nINPUT_PATH_MODELS" + INPUT_PATH_MODELS)
 
@@ -130,7 +131,7 @@ def main():
     form_html = create_form_html(df_model_setting['model'], CURRENT_MODEL_NAME, model_fields)
     
     # save HTML files
-    save_html_template(list_html, BASIC_APP_PATH, CURRENT_MODEL_NAME, f"""{CURRENT_MODEL_NAME.lower()}s-list.html""")
+    save_html_template(list_html, BASIC_APP_PATH, CURRENT_MODEL_NAME, f"""{CURRENT_MODEL_NAME.lower()}-list.html""")
     save_html_template(create_html, BASIC_APP_PATH, CURRENT_MODEL_NAME, f"{CURRENT_MODEL_NAME.lower()}-create.html")
     save_html_template(update_html, BASIC_APP_PATH, CURRENT_MODEL_NAME, f"{CURRENT_MODEL_NAME.lower()}-update.html")
     save_html_template(delete_html, BASIC_APP_PATH, CURRENT_MODEL_NAME, f"{CURRENT_MODEL_NAME.lower()}-delete.html")
@@ -138,5 +139,12 @@ def main():
     save_html_template(confirm_delete, BASIC_APP_PATH, CURRENT_MODEL_NAME, f"{CURRENT_MODEL_NAME.lower()}-confirm-delete.html")
     save_html_template(form_html, BASIC_APP_PATH, CURRENT_MODEL_NAME, f"{CURRENT_MODEL_NAME.lower()}-form.html")
 
+    
+    # Create the admin.py
+    admin_py_str = create_admin(df_model_setting['model'], CURRENT_MODEL_NAME)
+    save_admin_py(admin_py_str, BASIC_APP_PATH, CURRENT_MODEL_NAME)
+    # create the settings
+    # installed_apps
+    # template_dirs
 if __name__ == "__main__":
     main()
