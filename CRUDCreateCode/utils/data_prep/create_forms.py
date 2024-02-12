@@ -7,6 +7,7 @@ def create_forms(df, model_name):
     print(form_fields)
     # Starting script
     forms_content = f"""from django import forms
+from .serializers import {model_name.capitalize()}Serializer
 from .models import {model_name.capitalize()}\n
 
 
