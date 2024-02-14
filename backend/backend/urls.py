@@ -22,6 +22,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('customer/', include('Customer.urls')),  # Include your app's URLs here
+    path('dashboard/', include('Dashboardtestdata.urls')),  # Include your app's URLs here
+
 
 ]
 if settings.DEBUG:

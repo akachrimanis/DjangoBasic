@@ -1,16 +1,26 @@
 def create_list_html(df, model_name):
     df = df.astype(str)
     # Starting script
-   
+    
+    def show_variables_in_form(df):
+        form_fields = df[df['forms']=="True"]['Variable'].tolist()
+
+
+        for field in form_fields:
+            txt += f"{{{{ {model_name.lower()}.{field} }}}} "
+            
+        return txt
+    txt = show_variables_in_form(df)    
+
     html_content = f"""
     {{% extends 'base.html' %}} 
     {{% block content %}}  \n
     <h2>{model_name} List</h2>
-<a href="{{%  url '{model_name.lower()}_create' %}} ">Create New {model_name.capitalize()} </a>
+<a href="{{%  url '{model_name.lower()}-create' %}} ">Create New {model_name.capitalize()} </a>
 <ul>
-    {{%  for {model_name.lower()} in {model_name.lower()}s %}} 
+{txt}
     <li>
-        {{{{ {model_name.lower()}.name }}}} ({{{{ {model_name.lower()}.email }}}} )
+        {{{{ {model_name.lower()}.date }}}} {{{{ {model_name.lower()}.price }}}}
         <a href="{{%  url '{model_name.lower()}-update' {model_name.lower()}.id %}} ">Edit</a>
         <a href="{{% url '{model_name.lower()}-delete' {model_name.lower()}.id %}} ">Delete</a>
     </li>

@@ -1,0 +1,42 @@
+<!-- dashboard.html -->
+{% extends 'base.html' %} 
+{% block title %} Dashboard Data {% endblock title%}
+
+{% block scripts %} 
+<div>
+    <canvas id="myChart"></canvas>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: [{% for item in qs %}'{{item.date}}',{% endfor %}],
+        datasets: [{
+          label: '# of Votes',
+          data: [{% for item in qs %}{{item.price}},{% endfor %}],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  </script>
+  
+
+{% endblock scripts %} 
+{% block content %}
+<body>
+
+
+</body>
+{% endblock content%} 

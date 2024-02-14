@@ -1,0 +1,52 @@
+<!-- dashboardtestdata-list.html -->
+
+{% extends 'base.html' %} 
+{% block content %}  
+
+<div class="container">
+    <h1>Dashboard Data</h1>
+
+    <!-- Display Data -->
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                {% for field in dashboardtestdatas.model._meta.fields %}
+                                    {% if field.name != 'id' %}
+                                        <th>{{ field.verbose_name }}</th>
+                                    {% endif %}
+                                {% endfor %}
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in dashboardtestdatas %}
+                            <tr>
+                                {% for field in dashboardtestdatas.model._meta.fields %}
+                                    {% if field.name != 'id' %}
+                                        <td>{{ getattr(data, field.name) }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                                <td>
+                                    <a href="{% url 'dashboardtestdata-update' data.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                                    <a href="{% url 'dashboardtestdata-delete' data.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="{{ dashboardtestdatas.model._meta.fields|length }}">No data available</td>
+                                <td></td> <!-- Add empty cell for Actions column -->
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

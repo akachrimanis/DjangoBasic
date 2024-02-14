@@ -33,11 +33,12 @@ print("INPUT_PATH_MODELS" + BASIC_PATH, "\nINPUT_PATH_SETTINGS" + INPUT_PATH_SET
 def main():
     
    # Create the folder structure
-    create_main_folders(config)
-    print("Template folder path:" + template_mystaticfiles_PATH)
-    print("Source folder css:" + config.SOURCE_FOLDER_CSS)
-    print("Destinations folder css:" + config.DESTINATION_FOLDER_CSS)
-    copy_file_to_destination(config.SOURCE_FOLDER_CSS,config.DESTINATION_FOLDER_CSS)
+    if 0:
+        create_main_folders(config)
+        print("Template folder path:" + template_mystaticfiles_PATH)
+        print("Source folder css:" + config.SOURCE_FOLDER_CSS)
+        print("Destinations folder css:" + config.DESTINATION_FOLDER_CSS)
+        copy_file_to_destination(config.SOURCE_FOLDER_CSS,config.DESTINATION_FOLDER_CSS)
     
     # get the names of teh models to be run
     try:
@@ -58,39 +59,44 @@ def main():
     print("Destination settings.py: " + BACKEND_MAINAPP_PATH)
 
     # replace settings file
-    replace_settings_file(config.BACKEND_MAINAPP_PATH,config.SOURCE_FOLDER_SETTINGS)
+    if 0:
+        replace_settings_file(config.BACKEND_MAINAPP_PATH,config.SOURCE_FOLDER_SETTINGS)
         
     # Read the setting for the model creation from the file model.xlsx
     # Example usage
-    CURRENT_MODEL_NAME = model_names[0].split(".")[0]
-    print("Current model created: " + CURRENT_MODEL_NAME)
-    file_path = INPUT_PATH_MODELS + CURRENT_MODEL_NAME + ".xlsx" # Replace with your file path
-    sheet_names = ['model','model_functions', 'serializers', 'views', 'html', 'forms', "urls"]
+    config
+    def create_all_models(model_names, config):
+        CURRENT_MODEL_NAME = model_names[0].split(".")[0]
+        print("Current model created: " + CURRENT_MODEL_NAME)
+        file_path = config.INPUT_PATH_MODELS + CURRENT_MODEL_NAME + ".xlsx" # Replace with your file path
+        sheet_names = ['model','model_functions', 'serializers', 'views', 'html', 'forms', "urls"]
 
-    try:
-        df_model_setting = read_excel_sheets(file_path, sheet_names)
-        print("\nThe sheets of model settings are:")
-        for name, df in df_model_setting.items():
-            print(f"Data from sheet '{name}':")
-            #print(df.head())  # Display the first few rows of each DataFrame
-    except Exception as e:
-        print(f"Error: {e}")
+        try:
+            df_model_setting = read_excel_sheets(file_path, sheet_names)
+            print("\nThe sheets of model settings are:")
+            for name, df in df_model_setting.items():
+                print(f"Data from sheet '{name}':")
+                #print(df.head())  # Display the first few rows of each DataFrame
+        except Exception as e:
+            print(f"Error: {e}")
+            
+        # Create the text for the models.py file 
+        # Create the model parameters and definitions
+        model_definitions = create_model(df_model_setting['model'], model_name=CURRENT_MODEL_NAME)
+        print("\n The model's variables are:")
+        print(df_model_setting['model'][df_model_setting['model']["filter_use"] == "True"]["Variable"].tolist())
         
-    # Create the text for the models.py file 
-    # Create the model parameters and definitions
-    model_definitions = create_model(df_model_setting['model'], model_name=CURRENT_MODEL_NAME)
-    print("\n The model's variables are:")
-    print(df_model_setting['model'][df_model_setting['model']["filter_use"] == "True"]["Variable"].tolist())
-    
-    model_fields = df_model_setting['model'][df_model_setting['model']["filter_use"] == "True"]["Variable"].tolist()
-    #df_model_setting['model'] = df_model_setting['model'][df["filter_use"] == "True"]
-    # create the functionality
-    model_functionality = create_functionality(df_model_setting['model_functions'])
-    models_py_str = model_definitions + "\n" + model_functionality
+        model_fields = df_model_setting['model'][df_model_setting['model']["filter_use"] == "True"]["Variable"].tolist()
+        #df_model_setting['model'] = df_model_setting['model'][df["filter_use"] == "True"]
+        # create the functionality
+        model_functionality = create_functionality(df_model_setting['model_functions'])
+        models_py_str = model_definitions + "\n" + model_functionality
 
-    # Save the models.py file accordingly
-    print(models_py_str)
-    save_model_py(models_py_str, BASIC_APP_PATH, CURRENT_MODEL_NAME)  
+        # Save the models.py file accordingly
+        print(models_py_str)
+        save_model_py(models_py_str, BASIC_APP_PATH, CURRENT_MODEL_NAME)  
+        
+        return CURRENT_MODEL_NAME
     
     ## serializers.py
     # Create serializers.py

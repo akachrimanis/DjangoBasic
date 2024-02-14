@@ -1,0 +1,13 @@
+
+    {% extends 'base.html' %} 
+    {% block content %} 
+
+    <h2>Delete Dashboardtestdata</h2>
+<p>Are you sure you want to delete "{{ dashboardtestdata.name }}"?</p>
+<form method="post">
+    {% csrf_token %} 
+    <button type="submit">Yes, delete</button>
+</form>
+<a href="{% url 'dashboardtestdata-list' %} ">Cancel</a>
+{% endblock %} 
+

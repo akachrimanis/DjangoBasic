@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'rest_framework',
+    'Dashboardtestdata',
     'Customer',
     'crispy_forms',
     'corsheaders',
@@ -65,7 +66,10 @@ ROOT_URLCONF = 'backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'templates'),os.path.join(BASE_DIR,'templates','Customer')],
+        'DIRS': [os.path.join(BASE_DIR,'templates'),
+                 os.path.join(BASE_DIR,'templates','Customer'),
+                 os.path.join(BASE_DIR,'templates','Dashboardtestdata'),
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -143,3 +147,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
