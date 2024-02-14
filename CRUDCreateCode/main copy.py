@@ -17,6 +17,7 @@ from utils.data_prep.create_html_basic import create_list_html,create_create_htm
 from utils.data_prep.find_model_names import get_file_names
 from utils.data_prep.create_settings import replace_settings_file
 from utils.data_prep.create_admin import create_admin
+from utils.data_prep.create_charts import *
 from utils.dataIO.read_settings_xlsx import read_excel_to_dataframe
 from utils.dataIO.read_model_xlsx import read_excel_sheets 
 from utils.dataIO.save_serializer_template import save_serializers_py
@@ -162,6 +163,22 @@ def create_one_html(CURRENT_MODEL_NAME, df_model_setting, config):
     save_html_template(confirm_delete, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"{CURRENT_MODEL_NAME.lower()}-confirm-delete.html")
     save_html_template(form_html, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"{CURRENT_MODEL_NAME.lower()}-form.html")
     
+# create charts
+def create_one_chart(df, model_name):
+    CURRENT_MODEL_NAME = model_name.split(".")[0] # CURRENT_MODEL_NAME
+
+    chart = create_chart(df, CURRENT_MODEL_NAME, 'line')
+    save_html_template(chart, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"""{CURRENT_MODEL_NAME.lower()}-line.html""")
+    chart = create_chart(df, CURRENT_MODEL_NAME, 'bubble')
+    save_html_template(chart, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"""{CURRENT_MODEL_NAME.lower()}-bubble.html""")
+    chart = create_chart(df, CURRENT_MODEL_NAME, 'bar')
+    save_html_template(chart, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"""{CURRENT_MODEL_NAME.lower()}-bar.html""")    
+    chart = create_chart(df, CURRENT_MODEL_NAME, 'bubble')
+    save_html_template(chart, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"""{CURRENT_MODEL_NAME.lower()}-bubble.html""")    
+    chart = create_chart(df, CURRENT_MODEL_NAME, 'scatter')
+    save_html_template(chart, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"""{CURRENT_MODEL_NAME.lower()}-scatter.html""")    
+    chart = create_chart(df, CURRENT_MODEL_NAME, 'radar')
+    save_html_template(chart, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"""{CURRENT_MODEL_NAME.lower()}-radar.html""")
 def create_django_functions(model_name, config, models=1, serializers=1, urls=1, views=1, admin=1, forms=1, html=1):
         """Create all teh files and functions for one model"""
         
@@ -174,10 +191,11 @@ def create_django_functions(model_name, config, models=1, serializers=1, urls=1,
         create_one_admin(CURRENT_MODEL_NAME, df_model_setting, config) #admin
         create_one_forms(CURRENT_MODEL_NAME, df_model_setting, config) # forms
         create_one_html(CURRENT_MODEL_NAME, df_model_setting, config) # html
-        
-    # create the settings
-        # installed_apps
-        # template_dirs
+
+
+# create the settings
+# installed_apps
+# template_dirs
 def main():
     # main_create_folders(config)
     model_names = get_model_names(config)
