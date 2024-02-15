@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Date range input fields -->
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate">
+
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate">
+
+    <!-- Canvas for the chart -->
+    <canvas id="myChart" width="400" height="400"></canvas>
+
+    <script>
+        // Function to fetch data from Django view and update the chart
+        function updateChart(startDate, endDate) {
+            fetch(`/your-django-view-url?start_date=${startDate}&end_date=${endDate}`)
+                .then(response => response.json())
+                .then(data => {
+                    const labels = data.labels;
+                    const values = data.values;
+
+                    const ctx = document.getElementById('myChart').getContext('2d');
+                    const myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Data',
+                                data: values,
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                xAxes: [{
+                                    type: 'time',
+                                    time: {
+                                        unit: 'day'
+                                    }
+                                }],
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
+
+        // Event listener for date input changes
+        document.getElementById('startDate').addEventListener('change', function() {
+            const startDate = this.value;
+            const endDate = document.getElementById('endDate').value;
+            if (startDate && endDate && startDate > endDate) {
+                alert("Start Date cannot be greater than End Date.");
+                this.value = endDate;
+                return;
+            }
+            updateChart(startDate, endDate);
+        });
+
+        document.getElementById('endDate').addEventListener('change', function() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = this.value;
+            if (startDate && endDate && startDate > endDate) {
+                alert("End Date cannot be less than Start Date.");
+                this.value = startDate;
+                return;
+            }
+            updateChart(startDate, endDate);
+        });
+
+        // Initial chart rendering
+        const startDate = document.getElementById('startDate').value;
+        const endDate = document.getElementById('endDate').value;
+        updateChart(startDate, endDate);
+    </script>
+</body>
+</html>

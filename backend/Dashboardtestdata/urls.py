@@ -24,7 +24,7 @@ urlpatterns = [
     path('scatter/', views.DashboardTemplateScatter.as_view(), name='scatter'),
     path('bubble/', views.DashboardTemplateBubble.as_view(), name='bubble'),
     path('doughnut/', views.DashboardTemplateDoughnut.as_view(), name='doughnut'),
-    path('doughnut/', views.DashboardTemplateDoughnut.as_view(), name='doughnut'),
+    path('chart_with_date_range/', views.DashboardTemplateDoughnut.as_view(), name='chart_with_date_range'),
     path('doughnut/', views.DashboardTemplateDoughnut.as_view(), name='doughnut'),
 
 

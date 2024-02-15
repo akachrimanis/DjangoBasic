@@ -115,3 +115,53 @@ class DashboardTemplateBubble(TemplateView):
         context["qs"] = Dashboardtestdata.objects.all()
         return context
     
+    
+class DashboardTemplateBubble(TemplateView):
+    template_name = "chart_with_date_range.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["qs"] = Dashboardtestdata.objects.all()
+        return context
+    
+class DashboardListViewSearch(ListView):
+    model = Dashboardtestdata
+    template_name = 'chart-select-field.html'
+    context_object_name = 'dashboards'
+    paginate_by = 10  # Number of objects per page, you can adjust as needed
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        
+        # Example: Filtering based on a query parameter in the URL
+        search_query = self.request.GET.get('search', None)
+        if search_query:
+            queryset = queryset.filter(your_field__icontains=search_query)
+        
+        # You can add more filtering based on other fields as needed
+        
+        return queryset
+    
+    
+from django.utils.timezone import make_aware
+from datetime import datetime
+from django.http import JsonResponse
+from django.views.generic import View
+
+class DashboardDataView(View):
+    def get(self, request):
+        start_date = request.GET.get('start_date')
+        end_date = request.GET.get('end_date')
+
+        # Convert start_date and end_date strings to datetime objects
+        start_date = make_aware(datetime.strptime(start_date, '%Y-%m-%d'))
+        end_date = make_aware(datetime.strptime(end_date, '%Y-%m-%d'))
+
+        # Query data based on the date range
+        data = Dashboardtestdata.objects.filter(date__range=(start_date, end_date))
+
+        # Prepare data for JSON response
+        labels = [obj.date.strftime('%Y-%m-%d') for obj in data]
+        values = [obj.price for obj in data]
+
+        return JsonResponse({'labels': labels, 'values': values})
