@@ -2,6 +2,119 @@
 This is a basic Django App used for  training, testing and iterating on ideas with colleagues of AIMONETIZE initiative
 
 # TODO
+- add signasls functionality in the CRUDCreateCode
+- templates:chart templates in CRUDCreateCode
+- url: add the charts
+- views: add special vierws for serving:
+  - dashboards
+  - data presentations
+  - charts
+  - CRUD
+  - SEARCH/ filtering etc
+  - add sending coplex data and with field and meta information to athe api
+- models: add aggregates with signal
+  - aggregate in terms of time, variables, customer etc
+  - add models for CRM 
+  - add models for different tables for customer segments needs
+  - add role based security
+  - create fake data for the models and teh scripts to create them
+  - create code to autpcreate multiple models per app. Fix teh code and the excel file. Add a column to all sheets with teh name of the model and on teh next column(s) will be their definitions
+- charts:
+  - create a UI for managing the colours, optinos, configurations etc of the charts.js
+  - create functionality:
+    - filters
+    - selections
+    - ranges
+    - tickboxes
+    - chart type
+  - Add a set of chart templates of different types with combinations of colours and settings to choose from
+- website-html:
+  - fix the dashboard layout
+  - fill in the dashboard layout with the dynamic charts
+  - add the filters/ searches/ ranges etc accordingly
+- react:
+  - create a dashboard app
+  - create the templates for a series of charts
+  - create the api connection
+- security
+  ````
+  Ensuring the security of your Django project is crucial for protecting sensitive data and preventing potential security breaches. Here are some of the most important security configurations to assess and implement:
+
+1. **SECRET_KEY Protection**:
+   - Keep your `SECRET_KEY` value secure and avoid exposing it in version control or publicly accessible locations.
+   - Store your `SECRET_KEY` in an environment variable or a separate configuration file that is not publicly accessible.
+
+   ```python
+   # settings.py
+   SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+   ```
+
+2. **DEBUG Mode**:
+   - Disable the `DEBUG` mode in production to prevent detailed error messages from being displayed to users, which can expose sensitive information.
+
+   ```python
+   # settings.py
+   DEBUG = False
+   ```
+
+3. **Allowed Hosts**:
+   - Define a list of allowed hosts in your Django settings to prevent HTTP Host header attacks.
+
+   ```python
+   # settings.py
+   ALLOWED_HOSTS = ['yourdomain.com', 'www.yourdomain.com']
+   ```
+
+4. **HTTPS Configuration**:
+   - Use HTTPS to encrypt data transmitted between the client and the server, especially for sensitive information such as authentication credentials.
+   - Configure your web server (e.g., Nginx, Apache) to enforce HTTPS and redirect HTTP requests to HTTPS.
+
+5. **CSRF Protection**:
+   - Enable CSRF protection to prevent Cross-Site Request Forgery attacks.
+
+   ```python
+   # settings.py
+   CSRF_COOKIE_SECURE = True
+   ```
+
+6. **X-Frame-Options Header**:
+   - Set the `X-Frame-Options` header to prevent your site from being embedded in frames on other domains, which can help mitigate Clickjacking attacks.
+
+   ```python
+   # settings.py
+   X_FRAME_OPTIONS = 'DENY'
+   ```
+
+7. **Content Security Policy (CSP)**:
+   - Implement a Content Security Policy to control which resources are allowed to be loaded by your web application, reducing the risk of XSS attacks.
+
+   ```python
+   # settings.py
+   CSP_DEFAULT_SRC = ("'self'",)
+   ```
+
+8. **Authentication and Authorization**:
+   - Use Django's built-in authentication system for user authentication and authorization.
+   - Implement proper access controls to restrict users' permissions based on their roles and privileges.
+
+9. **Password Management**:
+   - Enforce strong password policies, such as minimum length and complexity requirements.
+   - Use Django's password hashing mechanism to securely store user passwords.
+
+10. **Regular Security Updates**:
+    - Keep Django and its dependencies up-to-date with the latest security patches to address known vulnerabilities.
+
+11. **Input Validation and Sanitization**:
+    - Validate and sanitize user inputs to prevent injection attacks (e.g., SQL injection, XSS).
+    - Use Django's built-in form validation and model field validation to validate user inputs.
+
+12. **Secure File Uploads**:
+    - Implement proper validation and restrictions on file uploads to prevent malicious files from being uploaded to your server.
+    - Store uploaded files in a secure location with restricted access.
+
+By implementing these security configurations and best practices, you can enhance the security posture of your Django project and reduce the risk of potential security threats. Additionally, regularly conducting security audits and vulnerability assessments can help identify and address any security weaknesses in your application.
+  ````
+
 - add django channels and asynchronous communication with websockets
 # Overview
 The structure of this app is:
@@ -153,174 +266,24 @@ When working with Django projects, there are several common libraries and packag
 
 Remember, the libraries you choose should be based on the specific needs of your project. Always ensure compatibility with the Django version you are using and keep an eye on the maintenance status and community support for third-party libraries.
 
-````python
-"""
-Django settings for backend project.
-
-Generated by 'django-admin startproject' using Django 4.2.7.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/4.2/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/4.2/ref/settings/
-"""
-
-from pathlib import Path
-import os
-import django
-django.setup()
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-bm)sn&2^=4%(5b22s$w_fxcz$+t_50r3_-!2&(_l9p&rsdvk-a'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
-
-# Application definition
-
-INSTALLED_APPS = [
-    #'Customer',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'rest_framework',
-    'crispy_forms',
-    'corsheaders',
-    'debug_toolbar',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.account.auth_backends.AuthenticationBackend',
-    'index.apps.IndexConfig',
-    'account.apps.AccountConfig',
-    'community.apps.CommunityConfig',
-    'django_filters',
-    
-]
-
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
-
-ROOT_URLCONF = 'backend.urls'
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
-WSGI_APPLICATION = 'backend.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.2/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = 'static/'
-
-# If STATICFILES_DIRS is not defined, add it
-STATICFILES_DIRS = [
-    BASE_DIR / 'mystaticfiles',  # Adjust the path to match your structure
-]
-# Media files
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-````
 
 ### admin
 
 
 
 ### serializers
+Serializers is a straightforward function that peety much stays teh same across the models
 
 
 ### signals
 
 
 
-### serializers
+### html
 
 
 
-### serializers
+### charts
 
 
 
