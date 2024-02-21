@@ -18,7 +18,12 @@ from utils.data_prep.find_model_names import get_file_names
 from utils.data_prep.create_settings import replace_settings_file
 from utils.data_prep.create_admin import create_admin
 from utils.data_prep.create_charts import *
+from utils.data_prep.create_apps import create_apps
+from utils.data_prep.create_install_sh import create_install_sh
+from utils.data_prep.create_signals import create_signals
+
 from utils.dataIO.read_settings_xlsx import read_excel_to_dataframe
+from utils.data_prep.create_settings import create_settings, save_settings_py
 from utils.dataIO.read_model_xlsx import read_excel_sheets 
 from utils.dataIO.save_serializer_template import save_serializers_py
 from utils.dataIO.save_model_template import save_model_py
@@ -27,6 +32,8 @@ from utils.dataIO.save_urls_template import save_urls_py
 from utils.dataIO.save_forms_template import save_forms_py
 from utils.dataIO.save_html_template import save_html_template
 from utils.dataIO.save_admin import save_admin_py
+from utils.dataIO.save_apps_template import save_apps_py
+from utils.dataIO.save_install_sh import save_install_sh
 
 print("INPUT_PATH_MODELS" + BASIC_PATH, "\nINPUT_PATH_SETTINGS" + INPUT_PATH_SETTINGS, "\nINPUT_PATH_MODELS" + INPUT_PATH_MODELS)
     
@@ -162,7 +169,17 @@ def create_one_html(CURRENT_MODEL_NAME, df_model_setting, config):
     save_html_template(detail_html, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"{CURRENT_MODEL_NAME.lower()}-details.html")
     save_html_template(confirm_delete, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"{CURRENT_MODEL_NAME.lower()}-confirm-delete.html")
     save_html_template(form_html, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"{CURRENT_MODEL_NAME.lower()}-form.html")
-    
+
+# create apps
+def create_one_apps(CURRENT_MODEL_NAME, df, config):
+    apps_py_str = create_apps(df)
+    save_apps_py(apps_py_str, config.BASIC_APP_PATH, CURRENT_MODEL_NAME)
+
+# create signals
+def create_one_signals(CURRENT_MODEL_NAME, df, config):
+    sygnals_py_str = create_signals(df)
+    save_apps_py(sygnals_py_str, config.BASIC_APP_PATH, CURRENT_MODEL_NAME)
+
 # create charts
 def create_one_chart(df, model_name):
     CURRENT_MODEL_NAME = model_name.split(".")[0] # CURRENT_MODEL_NAME
@@ -179,10 +196,12 @@ def create_one_chart(df, model_name):
     save_html_template(chart, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"""{CURRENT_MODEL_NAME.lower()}-scatter.html""")    
     chart = create_chart(df, CURRENT_MODEL_NAME, 'radar')
     save_html_template(chart, config.BASIC_APP_PATH, CURRENT_MODEL_NAME, f"""{CURRENT_MODEL_NAME.lower()}-radar.html""")
+
 def create_django_functions(model_name, config, models=1, serializers=1, urls=1, views=1, admin=1, forms=1, html=1):
         """Create all teh files and functions for one model"""
         
         CURRENT_MODEL_NAME = model_name.split(".")[0] # CURRENT_MODEL_NAME
+        
         df_model_setting = read_model_settings(CURRENT_MODEL_NAME, config) # Model configuration
         create_one_model(CURRENT_MODEL_NAME, df_model_setting, config) # models.py
         create_one_serializer(CURRENT_MODEL_NAME, df_model_setting, config) # serializers
@@ -191,6 +210,8 @@ def create_django_functions(model_name, config, models=1, serializers=1, urls=1,
         create_one_admin(CURRENT_MODEL_NAME, df_model_setting, config) #admin
         create_one_forms(CURRENT_MODEL_NAME, df_model_setting, config) # forms
         create_one_html(CURRENT_MODEL_NAME, df_model_setting, config) # html
+        create_one_apps(CURRENT_MODEL_NAME, df_model_setting, config) # apps
+        
 
 
 # create the settings
@@ -199,8 +220,12 @@ def create_django_functions(model_name, config, models=1, serializers=1, urls=1,
 def main():
     # main_create_folders(config)
     model_names = get_model_names(config)
+    print(model_names)
     for model_name in model_names:
         create_django_functions(model_name, config, models=1, serializers=1, urls=0, views=0, admin=0, forms=0, html=0)
 
+    settings_py_text = create_settings(model_names, config)
+    save_settings_py(settings_py_text, config.BACKEND_MAINAPP_PATH)
+    
 if __name__ == "__main__":
     main()

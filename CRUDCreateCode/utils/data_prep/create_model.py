@@ -15,14 +15,16 @@ def create_model(df, model_name):
     
     # Starting script
     model_content = f"""from django.db import models
-
+# CRETAE HERE THE LOOP FOR EACH MODEL:
+# : it will give the model_name teh name of each model in teh excel file
 # Create your models here.
 class {model_name}(models.Model):\n"""
     
     # create a list with all teh field types in the model variables
     variable_types=df["Type"].unique()
     # create teh text for importing teh libraries of teh fieldtypes
-    fieldtypes_libraries = """from django.db.models import ("""
+    fieldtypes_libraries = """from simple_history.models import HistoricalRecords
+    from django.db.models import ("""
     for i in variable_types:
         fieldtypes_libraries += f"{i},"
     fieldtypes_libraries = fieldtypes_libraries[:-1] + ")\n\n"

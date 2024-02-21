@@ -1,0 +1,690 @@
+
+
+            table Employee {
+		id integer [primary key] 
+		first_name Char
+		surname Char
+		age PositiveInteger
+		email Email
+		phone Char
+		address Char
+		department Char
+		role Char
+		employer ForeignKey
+		manager ForeignKey
+		organization ForeignKey
+
+
+            }
+table Employer {
+		id integer [primary key] 
+		company_name Char
+		password Char
+		email Email
+		name Char
+		organization ForeignKey
+		history HistoricalRecords
+
+
+            }
+table Individual {
+		id integer [primary key] 
+		history HistoricalRecords
+		employee ForeignKey
+		user OneToOne
+
+
+            }
+table Manager {
+		id integer [primary key] 
+		first_name Char
+		surname Char
+		age PositiveInteger
+		email Email
+		phone Char
+		address Char
+		department Char
+		role Char
+		employer ForeignKey
+		organization ForeignKey
+
+
+            }
+table Organization {
+		id integer [primary key] 
+		name Char
+		address Char
+		history HistoricalRecords
+
+		}
+Ref: Employee.employer > Employer.id 
+Ref: Employee.manager > Manager.id 
+Ref: Employee.organization > Organization.id 
+Ref: Employer.organization > Organization.id 
+Ref: Individual.employee > Employee.id 
+Ref: Individual.user > User.id 
+Ref: Manager.employer > Employer.id 
+Ref: Manager.organization > Organization.id 
+
+
+
+            table CustomerB2B {
+		id integer [primary key] 
+		name Char
+		history HistoricalRecords
+		updated_at DateTime
+		created_at DateTime
+		notes Text
+		company_group Char
+		bank_account_number Char
+		bank_name Char
+		payment_terms Char
+		registration_number Char
+		tax_id Char
+		annual_revenue Decimal
+		company_size PositiveInteger
+		swift_code Char
+		contact_phone Char
+		contact_email Email
+		contact_person Char
+		country Char
+		postal_code Char
+		state Char
+		city Char
+		address_line_2 Char
+		address_line_1 Char
+		website URL
+		phone Char
+		email Email
+		industry Char
+
+
+            }
+table CustomerB2BAggregate_country {
+		id integer [primary key] 
+		country  Char
+		total_customers  Char
+		total_industries  Integer
+		total_company_size  PositiveInteger
+		total_annual_revenue  Decimal
+
+
+            }
+table CustomerB2BGoup {
+		id integer [primary key] 
+		registration_number Char
+		updated_at DateTime
+		history HistoricalRecords
+		created_at DateTime
+		notes Text
+		company_group Char
+		swift_code Char
+		bank_account_number Char
+		bank_name Char
+		payment_terms Char
+		tax_id Char
+		city Char
+		company_size PositiveInteger
+		name Char
+		email Email
+		phone Char
+		annual_revenue Decimal
+		address_line_1 Char
+		address_line_2 Char
+		website URL
+		postal_code Char
+		country Char
+		contact_person Char
+		contact_email Email
+		contact_phone Char
+		industry Char
+		state Char
+
+
+            }
+table CustomerUserProfileB2B {
+		id integer [primary key] 
+		description Char
+		company ForeignKey
+		username Char
+		firstname Char
+		surname Char
+		email Email
+		phone Char
+		history HistoricalRecords
+
+		}
+Ref: CustomerUserProfileB2B.company > CustomerB2B.id 
+
+
+
+            table CustomerB2C {
+		id integer [primary key] 
+		firstname Char
+		history HistoricalRecords
+		updated_at DateTime
+		created_at DateTime
+		notes Text
+		postal_code Char
+		state Char
+		city Char
+		country Char
+		address_line_1 Char
+		website URL
+		phone Char
+		email Email
+		date_of_birth Date
+		surname Char
+		address_line_2 Char
+
+
+            }
+table CustomerUserProfileB2C {
+		id integer [primary key] 
+		last_login Char
+		username Char
+		firstname Char
+		surname Char
+		email Email
+		phone Char
+		history HistoricalRecords
+
+		}
+
+
+
+            table Customer {
+		id integer [primary key] 
+		date DateTime
+		price Integer
+		created_at DateTime
+		updated_at DateTime
+
+		}
+
+
+
+            table Address {
+		id integer [primary key] 
+		state Char
+		history HistoricalRecords
+		updated_at DateTime
+		created_at DateTime
+		address_type Char
+		is_billing_address Boolean
+		country Char
+		is_shipping_addrss Boolean
+		user ForeignKey
+		address_line_1 Char
+		address_line_2 Char
+		postal_code Char
+		city Char
+
+
+            }
+table Cart {
+		id integer [primary key] 
+		created_at DateTime
+		user ForeignKey
+		updated_at DateTime
+		history HistoricalRecords
+
+
+            }
+table CartItem {
+		id integer [primary key] 
+		cart ForeignKey
+		history HistoricalRecords
+		product ForeignKey
+		created_at DateTime
+		updated_at DateTime
+		quantity Integer
+
+
+            }
+table Discount {
+		id integer [primary key] 
+		history HistoricalRecords
+		updated_at DateTime
+		created_at DateTime
+		type Char
+		percentage Decimal
+		name Char
+
+
+            }
+table DiscountInvoice {
+		id integer [primary key] 
+		history HistoricalRecords
+		invoice ManyToMany
+		start_date Date
+		end_date Date
+		percentage Decimal
+		name Char
+
+
+            }
+table DiscountInvoiceItem {
+		id integer [primary key] 
+		name Char
+		percentage Decimal
+		start_date Date
+		end_date Date
+		products ManyToMany
+		history HistoricalRecords
+
+
+            }
+table InventoryMovement {
+		id integer [primary key] 
+		movement_type Char
+		product_stock ForeignKey
+		quantity PositiveInteger
+		movement_date DateTime
+		history HistoricalRecords
+
+
+            }
+table Invoice {
+		id integer [primary key] 
+		firstname Char
+		history HistoricalRecords
+		payment_terms Char
+		billing_address_country Char
+		shipping_address Char
+		shipping_address_city Char
+		shipping_address_state Char
+		shipping_address_postal_code Char
+		shipping_address_country Char
+		contact_person Char
+		contact_email Email
+		registration_number Char
+		tax_id Char
+		notes Text
+		contact_phone Char
+		billing_address_postal_code Char
+		billing_address_state Char
+		billing_address_city Char
+		billing_address Char
+		invoice_number Char
+		date_created Date
+		due_date Date
+		customer Char
+		company_group Char
+		company Char
+		surname Char
+
+
+            }
+table InvoiceItem {
+		id integer [primary key] 
+		total_payable Decimal
+		history HistoricalRecords
+		product_quantity Decimal
+		total_discount Decimal
+		total_vat Decimal
+		total_price Decimal
+		payable Decimal
+		discount Decimal
+		vat_percentage Decimal
+		product_code Char
+		product_unit_price Decimal
+		product_name Char
+
+
+            }
+table Order {
+		id integer [primary key] 
+		created_at DateTime
+		billing_address ForeignKey
+		user ForeignKey
+		order_date DateTime
+		total_amount Decimal
+		order_status Char
+		shipping_address ForeignKey
+		payment ForeignKey
+		updated_at DateTime
+		history HistoricalRecords
+
+
+            }
+table OrderItem {
+		id integer [primary key] 
+		order ForeignKey
+		product ForeignKey
+		price_per_item Decimal
+		discount_perc Decimal
+		discount_type Decimal
+		total_price_after_discount Decimal
+		created_at DateTime
+		updated_at DateTime
+		history HistoricalRecords
+		quantity Integer
+
+
+            }
+table Payment {
+		id integer [primary key] 
+		updated_at DateTime
+		order ForeignKey
+		amount Decimal
+		payment_method Char
+		payment_status Char
+		transaction_id Char
+		payment_date DateTime
+		history HistoricalRecords
+		created_at DateTime
+
+
+            }
+table Product {
+		id integer [primary key] 
+		name Char
+		category ForeignKey
+		updated_at DateTime
+		is_active Boolean
+		available Boolean
+		history HistoricalRecords
+		description Text
+		price Decimal
+		stock_quantity Integer
+		created_at DateTime
+
+
+            }
+table ProductAttribute {
+		id integer [primary key] 
+		product ForeignKey
+		attribute Char
+		history HistoricalRecords
+		value Char
+
+
+            }
+table ProductCategory {
+		id integer [primary key] 
+		name Char
+		description Text
+		parent ForeignKey
+		created_at DateTime
+		slug Slug
+		updated_at DateTime
+		history HistoricalRecords
+
+
+            }
+table ProductHistory {
+		id integer [primary key] 
+		Action Char
+		User Char
+		Timestamp DateTime
+		Data_before JSON
+		Data_after JSON
+		history HistoricalRecords
+		Product Char
+
+
+            }
+table ProductImage {
+		id integer [primary key] 
+		product ForeignKey
+		end_date Date
+		alt_text Char
+		image Image
+
+
+            }
+table ProductStock {
+		id integer [primary key] 
+		history HistoricalRecords
+		quantity PositiveInteger
+		product OneToOne
+
+
+            }
+table ProductView {
+		id integer [primary key] 
+		product Char
+		timestamp DateTime
+		history HistoricalRecords
+		data_before JSON
+		action Char
+		user Char
+		data_after JSON
+
+
+            }
+table Review {
+		id integer [primary key] 
+		history HistoricalRecords
+		created_at DateTime
+		product ForeignKey
+		review_date DateTime
+		comment Text
+		rating Integer
+		updated_at DateTime
+		user ForeignKey
+
+
+            }
+table Warehouse {
+		id integer [primary key] 
+		history HistoricalRecords
+		location Char
+		name Char
+
+		}
+Ref: Address.user > User.id 
+Ref: Cart.user > User.id 
+Ref: CartItem.cart > Cart.id 
+Ref: CartItem.product > Product.id 
+Ref: DiscountInvoice.invoice > Invoice.id 
+Ref: DiscountInvoiceItem.products > Product.id 
+Ref: InventoryMovement.product_stock > ProductStock.id 
+Ref: Order.billing_address > Address.id 
+Ref: Order.user > User.id 
+Ref: Order.shipping_address > Address.id 
+Ref: Order.payment > Payment.id 
+Ref: OrderItem.order > Order.id 
+Ref: OrderItem.product > Product.id 
+Ref: Payment.order > Order.id 
+Ref: Product.category > ProductCategory.id 
+Ref: ProductAttribute.product > Product.id 
+Ref: ProductCategory.parent > ProductCategory.id 
+Ref: ProductImage.product > Product.id 
+Ref: ProductStock.product > Product.id 
+Ref: Review.product > Product.id 
+Ref: Review.user > User.id 
+
+
+
+            table CartActivity {
+		id integer [primary key] 
+		activity_type Char
+		history HistoricalRecords
+		timestamp DateTime
+		quantity Integer
+		product ForeignKey
+		user_session ForeignKey
+
+
+            }
+table ClickEvent {
+		id integer [primary key] 
+		timestamp DateTime
+		element_id Char
+		user_session ForeignKey
+		history HistoricalRecords
+
+
+            }
+table ErrorLog {
+		id integer [primary key] 
+		timestamp DateTime
+		user_session ForeignKey
+		error_message Text
+
+
+            }
+table Event {
+		id integer [primary key] 
+		details Text
+		timestamp DateTime
+		event_type Char
+		user_session ForeignKey
+		history HistoricalRecords
+
+
+            }
+table PageView {
+		id integer [primary key] 
+		user_session ForeignKey
+		url URL
+		timestamp DateTime
+		history HistoricalRecords
+
+
+            }
+table SearchQuery {
+		id integer [primary key] 
+		history HistoricalRecords
+		timestamp DateTime
+		user_session ForeignKey
+		query Text
+
+
+            }
+table UserDevice {
+		id integer [primary key] 
+		history HistoricalRecords
+		timestamp DateTime
+		device_details Text
+		user_session ForeignKey
+
+
+            }
+table UserFeedback {
+		id integer [primary key] 
+		timestamp DateTime
+		feedback Text
+		user_session ForeignKey
+
+
+            }
+table UserPreference {
+		id integer [primary key] 
+		user OneToOne
+		preferences JSON
+		history HistoricalRecords
+
+
+            }
+table UserSession {
+		id integer [primary key] 
+		session_key Char
+		user ForeignKey
+		start_time DateTime
+		end_time DateTime
+		ip_address Char
+		history HistoricalRecords
+
+
+            }
+table Wishlist {
+		id integer [primary key] 
+		added_on DateTime
+		created_at DateTime
+		updated_at DateTime
+		history HistoricalRecords
+		product ForeignKey
+		user ForeignKey
+
+		}
+Ref: CartActivity.product > Product.id 
+Ref: CartActivity.user_session > UserSession.id 
+Ref: ClickEvent.user_session > UserSession.id 
+Ref: ErrorLog.user_session > UserSession.id 
+Ref: Event.user_session > UserSession.id 
+Ref: PageView.user_session > UserSession.id 
+Ref: SearchQuery.user_session > UserSession.id 
+Ref: UserDevice.user_session > UserSession.id 
+Ref: UserFeedback.user_session > UserSession.id 
+Ref: UserPreference.user > User.id 
+Ref: UserSession.user > User.id 
+Ref: Wishlist.product > Product.id 
+Ref: Wishlist.user > User.id 
+
+
+
+            table UserProfile {
+		id integer [primary key] 
+		user OneToOne
+		phone_number Char
+		address_line_1 Char
+		address_line_2 Char
+		city Char
+		state Char
+		country Char
+		postal_code Char
+		birth_date Date
+		history HistoricalRecords
+
+		}
+Ref: UserProfile.user > User.id 
+
+
+
+            table Interaction {
+		id integer [primary key] 
+		customer ForeignKey
+		date DateTime
+		interaction_type ForeignKey
+		notes Text
+		history HistoricalRecords
+
+
+            }
+table InteractionDetails {
+		id integer [primary key] 
+		handled_by ForeignKey
+		interaction OneToOne
+		details Text
+		history HistoricalRecords
+
+
+            }
+table InteractionType {
+		id integer [primary key] 
+		name Char
+
+
+            }
+table Task {
+		id integer [primary key] 
+		customer ForeignKey
+		task_type ForeignKey
+		due_date DateTime
+		description Text
+		assigned_to ForeignKey
+		history HistoricalRecords
+
+
+            }
+table TaskType {
+		id integer [primary key] 
+		name Char
+		history HistoricalRecords
+
+		}
+Ref: Interaction.customer > Customer.id 
+Ref: Interaction.interaction_type > InteractionType.id 
+Ref: InteractionDetails.handled_by > User.id 
+Ref: InteractionDetails.interaction > Interaction.id 
+Ref: Task.customer > Customer.id 
+Ref: Task.task_type > TaskType.id 
+Ref: Task.assigned_to > User.id 
+
+
+table User {
+    id integer [primary key]
+}

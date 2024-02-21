@@ -162,9 +162,12 @@ export PATH="/Users/tkax/dev/aimonetize/DjangoBasic/myenv/bin:$PATH"
 ````commandline
 pip install --upgrade pip
 pip install django djangorestframework
-pip install pandas openpyxl numpy jupyterlab
+pip install pandas openpyxl numpy jupyterlab django-simple-history
 pip install celery django-debug-toolbar django-allauth django-cors-headers django-filter django-crispy-forms djangorestframework-simplejwt
 pip install channels redis # asynchronous/ websockets
+pip install openai
+
+
 django-admin startproject backend
 python3 manage.py startapp Customer
 python3 manage.py migrate

@@ -1,7 +1,6 @@
 import os
-import config
 import pandas as pd
-import os
+
 
 def read_excel_sheets(file_path, sheet_names):
     # Check if the file exists
@@ -17,15 +16,3 @@ def read_excel_sheets(file_path, sheet_names):
             raise Exception(f"An error occurred while reading the sheet '{sheet_name}': {e}")
 
     return dataframes
-
-
-
-
-
-
-
-# Create a list with the models to be read
-# import pandas lib as pd
- 
-# read by default 1st sheet of an excel file
- 
