@@ -1,6 +1,6 @@
 import os
 
-sheet_names = ['model','model_functions', 'serializers', 'views', 'html', 'forms', "urls", "admin"]# "apps", "imports"
+sheet_names = ['model','model_functions', 'serializers', 'views', 'html', 'forms', "urls", "admin","apps", "imports"]# "apps", "imports"
 parameter_vars = ['ForeignKey', 'through', 'parent_link', 'related_name', 'related_query_name', 'on_delete', 'primary_key', 'max_length', 'unique', 'blank', 'null', 'default', 'auto_now_add', 'auto_now','verbose_name']
 APP_NAMES= ['Organisation','CustomerB2B', 'CustomerB2C', 'Dashboard','Product', 'EventTracking', 'UserProfile', "CRM"]
 name_staticfiles = "mystaticfiles"
