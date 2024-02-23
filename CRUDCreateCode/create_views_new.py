@@ -25,12 +25,11 @@ def find_model_names(df, column_name="model"):
 def find_app_names(df, column_name="model"):
     return loaded_data[column_name]["app_name"].unique()
 def create_views(df, model_name):
-    df = df.astype(str)
-
     # Starting script
    
     
-    views_class = f"""\nclass {model_name.capitalize()}ViewSet(viewsets.ModelViewSet):
+    views_class = f"""\n
+class {model_name}ViewSet(viewsets.ModelViewSet):
     queryset = {model_name}.objects.all()
     serializer_class = {model_name}Serializer
     
@@ -64,7 +63,7 @@ class {model_name}DeleteView(DeleteView):
    
     """
     #print(views_content + views_class)
-    return views_content + views_class
+    return views_class
 
 def save_views_py(my_string, output_path, model_name):
     file_name = "views.py"
@@ -94,15 +93,21 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView, D
 
 def home(request):
     return render(request, "home.html",{{}})
+
 """
     views_imports = ""
     views_content = ""
     model_names = loaded_data['model'][loaded_data['model']["app_name"]==app_name]["model_name"].unique().tolist()
+    
+    serializer_models = f"\nfrom .serializers import"
+    forms_models = f"\nfrom .forms import" 
+    import_models = f"""\nfrom .models import"""
+
     print(model_names)
     for model_name in model_names:
-        views_imports += f"""from .models import {model_name}
-from .serializers import {model_name}Serializer
-from .forms import {model_name}Form\n"""
+        import_models += f""" {model_name},"""
+        forms_models += f" {model_name}Form,"
+        serializer_models += f" {model_name}Serializer,"
         views_content += create_views(df=df, model_name=model_name)
-    app_model_content[app_name] = views_main_imports + views_imports + views_content
+    app_model_content[app_name] = views_main_imports + import_models[:-1] + forms_models[:-1] + serializer_models[:-1] + views_content
     save_views_py(app_model_content[app_name], config.BASIC_APP_PATH, app_name)

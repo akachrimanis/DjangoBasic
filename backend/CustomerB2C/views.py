@@ -6,14 +6,13 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView, D
 
 def home(request):
     return render(request, "home.html",{})
-from .models import CustomerB2C
-from .serializers import CustomerB2CSerializer
-from .forms import CustomerB2CForm
-from .models import CustomerUserProfileB2C
-from .serializers import CustomerUserProfileB2CSerializer
-from .forms import CustomerUserProfileB2CForm
 
-class Customerb2cViewSet(viewsets.ModelViewSet):
+
+from .models import CustomerB2C, CustomerUserProfileB2C
+from .forms import CustomerB2CForm, CustomerUserProfileB2CForm
+from .serializers import CustomerB2CSerializer, CustomerUserProfileB2CSerializer
+
+class CustomerB2CViewSet(viewsets.ModelViewSet):
     queryset = CustomerB2C.objects.all()
     serializer_class = CustomerB2CSerializer
     
@@ -46,40 +45,8 @@ class CustomerB2CDeleteView(DeleteView):
     success_url = reverse_lazy('customerb2c-list')  # Redirect to the CRUD view after successful deletion
    
     
-class Customerb2cViewSet(viewsets.ModelViewSet):
-    queryset = CustomerB2C.objects.all()
-    serializer_class = CustomerB2CSerializer
-    
-     # CustomerB2C Views  
-class CustomerB2CListView(ListView):
-    model = CustomerB2C
-    template_name = 'customerb2c-list.html'
-    context_object_name = 'customerb2cs'
-    
-class CustomerB2CDetailView(DetailView):
-    model = CustomerB2C
-    template_name = 'customerb2c-details.html'
-    context_object_name = 'customerb2cs'
 
-class CustomerB2CCreateView(CreateView):
-    model = CustomerB2C
-    form_class = CustomerB2CForm
-    template_name = 'customerb2c-form.html'
-    success_url = reverse_lazy('customerb2c-list')  # Redirect to the CRUD view after successful creation
-
-class CustomerB2CUpdateView(UpdateView):
-    model = CustomerB2C
-    form_class = CustomerB2CForm
-    template_name = 'customerb2c-form.html'
-    success_url = reverse_lazy('customerb2c-list')  # Redirect to the CRUD view after successful update
-
-class CustomerB2CDeleteView(DeleteView):
-    model = CustomerB2C
-    template_name = 'customerb2c-confirm-delete.html'
-    success_url = reverse_lazy('customerb2c-list')  # Redirect to the CRUD view after successful deletion
-   
-    
-class Customeruserprofileb2cViewSet(viewsets.ModelViewSet):
+class CustomerUserProfileB2CViewSet(viewsets.ModelViewSet):
     queryset = CustomerUserProfileB2C.objects.all()
     serializer_class = CustomerUserProfileB2CSerializer
     

@@ -6,9 +6,11 @@ from django.views.generic import CreateView, ListView, UpdateView, DeleteView, D
 
 def home(request):
     return render(request, "home.html",{})
+
+
 from .models import Dashboard
-from .serializers import DashboardSerializer
 from .forms import DashboardForm
+from .serializers import DashboardSerializer
 
 class DashboardViewSet(viewsets.ModelViewSet):
     queryset = Dashboard.objects.all()
