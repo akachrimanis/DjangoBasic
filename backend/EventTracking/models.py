@@ -1,7 +1,13 @@
 from django.db import models
-from simple_history.models import HistoricalRecords
-from Product.models import Product
 from django.contrib.auth.models import User
+from simple_history.models import HistoricalRecords
+
+from CustomerB2B.models import CustomerB2B
+from CustomerB2C.models import CustomerB2C
+from Product.models import Product
+    
+    
+    
 
 class UserSession(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)#Linktotheuser,if 

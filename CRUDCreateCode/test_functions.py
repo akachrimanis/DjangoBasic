@@ -56,16 +56,3 @@ def get_apps_names(config):
         print(f"Error: {e}")
     return model_names
 
-
-apps_list = get_apps_names(config)
-for i in apps_list:
-    CURRENT_APP = i.split(".")[0]
-    print("Current App: " + CURRENT_APP.split(".")[0])
-
-    dfs = read_model_settings(CURRENT_APP, config)
-    #print(dfs['model'].columns)
-    print(dfs['model']['model_name'].unique())
-    model_names = dfs['model']['model_name'].unique()
-    for model_name in model_names:
-        CURRENT_MODEL_NAME = model_name
-        print(CURRENT_MODEL_NAME)

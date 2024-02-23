@@ -34,9 +34,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Dashboard',
+    "CustomerB2B",
+    "CustomerB2C",
+    "CRM",
+    "Product",
+    "EventTracking",
+    'django.contrib.sites',
+    'django.contrib.flatpages',
     'rest_framework',
-    'Dashboardtestdata',
-    'Customer',
     'crispy_forms',
     'corsheaders',
     'django.contrib.admin',
@@ -47,9 +53,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_filters',
+    "simple_history"
     
 ]
-
+SITE_ID = 1
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -59,6 +66,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
+
 ]
 
 ROOT_URLCONF = 'backend.urls'

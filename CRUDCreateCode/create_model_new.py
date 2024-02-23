@@ -12,11 +12,16 @@ def save_model_py(my_string, output_path, model_name):
     file_name = "models.py"
     full_path = os.path.join(os.path.join(output_path,model_name), file_name)
     print(f"FILEPATH models.py: {full_path}")
+    if not os.path.exists(full_path):
+        print(f"Directory '{full_path}' does not exist")
+        with open(full_path, 'x') as file:
+            file.write(my_string + "\n")
+    else:
 # Writing the string to the file
-    with open(full_path, 'w') as file:
-        file.write(my_string + "\n")
+        with open(full_path, 'w') as file:
+            file.write(my_string + "\n")
 
-    print(f"String has been saved to {full_path}")
+        print(f"String has been saved to {full_path}")
 
 
 loaded_data = read_django_settings(file_name = config.INPUT_PATH_MODELS + "django-settings.pkl")
@@ -53,8 +58,11 @@ app_models = {}
 for app_name in app_names:
     # import libraries
     
-    model_imports = f"""from django.db import models\n"""
+    model_imports = f"""from django.db import models\nfrom django.contrib.auth.models import User\n from django.utils import timezone
+
+"""
     model_imports += f"""{fieldtypes_libraries}\n"""
+   
     model_definitions = ""
     
     df_model = df[df["app_name"]==app_name]
@@ -65,7 +73,12 @@ for app_name in app_names:
     #imports_names = df_imports['functions'].unique()
     print(df_imports['functions'])
     imports_names=df_imports['functions'].unique()
+    # find the foreignkeys
+ 
+    model_imports += f"""
+from Product.models import Product
     
+    """
     if imports_names.size > 0:
         for i in imports_names:
             model_imports += i + "\n"

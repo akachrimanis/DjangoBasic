@@ -1,7 +1,13 @@
 from django.db import models
+from django.contrib.auth.models import User
 from simple_history.models import HistoricalRecords
 
-
+from CustomerB2B.models import CustomerB2B
+from CustomerB2C.models import CustomerB2C
+from Product.models import Product
+    
+    
+    
 
 class Employee(models.Model):
     first_name = models.CharField(max_length=50) 
