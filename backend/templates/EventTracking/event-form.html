@@ -1,0 +1,16 @@
+
+   {% extends 'base.html' %} 
+   {% block content %} 
+
+<div class="container mt-5">
+    <h1>{% if event %}Edit Event{% else %}Create Event{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'event-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+    <a href="{% url 'event-create' %}">Add Event</a>  {# Assuming you have a URL named 'event-create' #}
+</div>
+{% endblock %} 
+

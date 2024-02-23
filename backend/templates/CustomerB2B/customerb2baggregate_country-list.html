@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>CustomerB2BAggregate_country List</h2>
+<a href="{%  url 'customerb2baggregate_country-create' %} ">Create New Customerb2baggregate_country </a>
+<ul>
+
+    <li>
+        {{ customerb2baggregate_country.date }} {{ customerb2baggregate_country.price }}
+        <a href="{%  url 'customerb2baggregate_country-update' customerb2baggregate_country.id %} ">Edit</a>
+        <a href="{% url 'customerb2baggregate_country-delete' customerb2baggregate_country.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>UserDevice List</h2>
+<a href="{%  url 'userdevice-create' %} ">Create New Userdevice </a>
+<ul>
+
+    <li>
+        {{ userdevice.date }} {{ userdevice.price }}
+        <a href="{%  url 'userdevice-update' userdevice.id %} ">Edit</a>
+        <a href="{% url 'userdevice-delete' userdevice.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

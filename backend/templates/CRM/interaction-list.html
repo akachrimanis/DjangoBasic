@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>Interaction List</h2>
+<a href="{%  url 'interaction-create' %} ">Create New Interaction </a>
+<ul>
+
+    <li>
+        {{ interaction.date }} {{ interaction.price }}
+        <a href="{%  url 'interaction-update' interaction.id %} ">Edit</a>
+        <a href="{% url 'interaction-delete' interaction.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

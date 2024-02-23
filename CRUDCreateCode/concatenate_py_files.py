@@ -16,24 +16,29 @@ def concatenate_py_files(config):
 
     for app_ in config.APP_NAMES:
         dataframes = read_excel_sheets(file_path=config.INPUT_PATH_MODELS+ app_ + ".xlsx", sheet_names=config.sheet_names)
+        print("----------------app: " + app_)
         for py in config.sheet_names: # Create a disctionnairy of dataframes for each .py file of teh django app
             if 'help' not in py:
                 print("py: " + py)
                 dataframes[py] = dataframes[py].dropna(subset="app_name")
                 dataframes_py[app_][py] = dataframes[py]
-        print("----------------app: " + app_)
+       
     df_py_list = {}
     df_py = {}
     for py in config.sheet_names: # Create a disctionnairy of dataframes for each .py file of teh django app
+        print("----------------py: " + py)
+
         if 'help' not in py:
             df_py_list[py]=[]
             for app_ in config.APP_NAMES:
-                df_py_list[py].append(dataframes_py[app_][py][~dataframes_py[app_][py].loc[:,py].isna()])  
+                # dataframes_py[app_][py][~dataframes_py[app_][py].loc[:,py].isna()]
+                df_py_list[py].append(dataframes_py[app_][py].dropna(subset=["model_name"]))
         df_py[py] = pd.concat(df_py_list[py], ignore_index=True).reset_index()    
     # create list with models
     # create dataframes with appended dat across all xlsx files
             
     #print(df_py)
+    #print(df_py["model"])
     return  df_py
 
 def read_django_settings(file_name = config.INPUT_PATH_MODELS + "django-settings.pkl"):
@@ -48,5 +53,6 @@ print(f"{df_py['model']['app_name'][df_py['model']['app_name'].isna()].count()}"
 pd.to_pickle(df_py, config.INPUT_PATH_MODELS + "django-settings.pkl")
 
 print("---------")
-print(read_django_settings(file_name = config.INPUT_PATH_MODELS + "django-settings.pkl"))
-print(df_py['model'][~df_py['model'].loc[:,"app_name"].isna()])
+#print(read_django_settings(file_name = config.INPUT_PATH_MODELS + "django-settings.pkl"))
+#print(df_py['model'][~df_py['model'].loc[:,"app_name"].isna()])
+print(df_py["imports"])

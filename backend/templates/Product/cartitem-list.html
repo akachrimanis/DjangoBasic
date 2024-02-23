@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>CartItem List</h2>
+<a href="{%  url 'cartitem-create' %} ">Create New Cartitem </a>
+<ul>
+
+    <li>
+        {{ cartitem.date }} {{ cartitem.price }}
+        <a href="{%  url 'cartitem-update' cartitem.id %} ">Edit</a>
+        <a href="{% url 'cartitem-delete' cartitem.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

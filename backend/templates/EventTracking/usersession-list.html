@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>UserSession List</h2>
+<a href="{%  url 'usersession-create' %} ">Create New Usersession </a>
+<ul>
+
+    <li>
+        {{ usersession.date }} {{ usersession.price }}
+        <a href="{%  url 'usersession-update' usersession.id %} ">Edit</a>
+        <a href="{% url 'usersession-delete' usersession.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

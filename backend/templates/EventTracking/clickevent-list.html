@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>ClickEvent List</h2>
+<a href="{%  url 'clickevent-create' %} ">Create New Clickevent </a>
+<ul>
+
+    <li>
+        {{ clickevent.date }} {{ clickevent.price }}
+        <a href="{%  url 'clickevent-update' clickevent.id %} ">Edit</a>
+        <a href="{% url 'clickevent-delete' clickevent.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

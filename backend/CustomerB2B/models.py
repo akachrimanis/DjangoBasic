@@ -1,0 +1,85 @@
+from django.db import models
+from simple_history.models import HistoricalRecords
+
+
+
+class CustomerB2B(models.Model):
+    name = models.CharField(max_length=100) 
+    email = models.EmailField(blank=True,null=True) 
+    phone = models.CharField(max_length=20,blank=True,null=True) 
+    website = models.URLField(blank=True,null=True) 
+    address_line_1 = models.CharField(max_length=255,blank=True,null=True) 
+    address_line_2 = models.CharField(max_length=255,blank=True,null=True) 
+    city = models.CharField(max_length=100,blank=True,null=True) 
+    state = models.CharField(max_length=100,blank=True,null=True) 
+    postal_code = models.CharField(max_length=20,blank=True,null=True) 
+    country = models.CharField(max_length=100,blank=True,null=True) 
+    contact_person = models.CharField(max_length=100,blank=True,null=True) 
+    contact_email = models.EmailField(blank=True,null=True) 
+    contact_phone = models.CharField(max_length=20,blank=True,null=True) 
+    industry = models.CharField(max_length=100,blank=True,null=True) 
+    company_size = models.PositiveIntegerField(blank=True,null=True,help_text="Number of employees") 
+    annual_revenue = models.DecimalField(max_digits=15,decimal_places=2,blank=True,null=True) 
+    tax_id = models.CharField(max_length=50,blank=True,null=True) 
+    registration_number = models.CharField(max_length=50,blank=True,null=True) 
+    payment_terms = models.CharField(max_length=100,blank=True,null=True) 
+    bank_name = models.CharField(max_length=100,blank=True,null=True) 
+    bank_account_number = models.CharField(max_length=50,blank=True,null=True) 
+    swift_code = models.CharField(max_length=50,blank=True,null=True) 
+    company_group = models.CharField(max_length=100,blank=True,null=True) 
+    notes = models.TextField(blank=True,null=True) 
+    created_at = models.DateTimeField(auto_now_add=True) 
+    updated_at = models.DateTimeField(auto_now=True) 
+    history = HistoricalRecords() 
+
+
+class CustomerB2BGoup(models.Model):
+    name = models.CharField(max_length=100) 
+    email = models.EmailField(blank=True,null=True) 
+    phone = models.CharField(max_length=20,blank=True,null=True) 
+    website = models.URLField(blank=True,null=True) 
+    address_line_1 = models.CharField(max_length=255,blank=True,null=True) 
+    address_line_2 = models.CharField(max_length=255,blank=True,null=True) 
+    city = models.CharField(max_length=100,blank=True,null=True) 
+    state = models.CharField(max_length=100,blank=True,null=True) 
+    postal_code = models.CharField(max_length=20,blank=True,null=True) 
+    country = models.CharField(max_length=100,blank=True,null=True) 
+    contact_person = models.CharField(max_length=100,blank=True,null=True) 
+    contact_email = models.EmailField(blank=True,null=True) 
+    contact_phone = models.CharField(max_length=20,blank=True,null=True) 
+    industry = models.CharField(max_length=100,blank=True,null=True) 
+    company_size = models.PositiveIntegerField(blank=True,null=True,help_text="Number of employees") 
+    annual_revenue = models.DecimalField(max_digits=15,decimal_places=2,blank=True,null=True) 
+    tax_id = models.CharField(max_length=50,blank=True,null=True) 
+    registration_number = models.CharField(max_length=50,blank=True,null=True) 
+    payment_terms = models.CharField(max_length=100,blank=True,null=True) 
+    bank_name = models.CharField(max_length=100,blank=True,null=True) 
+    bank_account_number = models.CharField(max_length=50,blank=True,null=True) 
+    swift_code = models.CharField(max_length=50,blank=True,null=True) 
+    company_group = models.CharField(max_length=100,blank=True,null=True) 
+    notes = models.TextField(blank=True,null=True) 
+    created_at = models.DateTimeField(auto_now_add=True) 
+    updated_at = models.DateTimeField(auto_now=True) 
+    history = HistoricalRecords() 
+
+
+class CustomerB2BAggregate_country(models.Model):
+    country  = models.CharField(max_length=100,blank=True,null=True) 
+    total_customers  = models.IntegerField(default=0) 
+    total_annual_revenue  = models.DecimalField(max_digits=15,decimal_places=2,default=0) 
+    total_industries  = models.IntegerField(default=0) 
+    total_company_size  = models.PositiveIntegerField(default=0) 
+
+
+class CustomerUserProfileB2B(models.Model):
+    company = models.ForeignKey(CustomerB2B, on_delete=models.CASCADE, related_name='user_profiles') 
+    username = models.CharField(max_length=100) 
+    firstname = models.CharField(max_length=100) 
+    surname = models.CharField(max_length=100) 
+    email = models.EmailField() 
+    phone = models.CharField(max_length=20, blank=True, null=True) 
+    description = models.CharField(max_length=100, blank=True, null=True) 
+    history = HistoricalRecords() 
+    created_at = models.DateTimeField(auto_now_add=True) 
+    updated_at = models.DateTimeField(auto_now=True) 
+

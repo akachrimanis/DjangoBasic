@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>Employee List</h2>
+<a href="{%  url 'employee-create' %} ">Create New Employee </a>
+<ul>
+
+    <li>
+        {{ employee.date }} {{ employee.price }}
+        <a href="{%  url 'employee-update' employee.id %} ">Edit</a>
+        <a href="{% url 'employee-delete' employee.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

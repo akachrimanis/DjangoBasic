@@ -1,0 +1,16 @@
+
+   {% extends 'base.html' %} 
+   {% block content %} 
+
+<div class="container mt-5">
+    <h1>{% if cartactivity %}Edit CartActivity{% else %}Create CartActivity{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'cartactivity-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+    <a href="{% url 'cartactivity-create' %}">Add CartActivity</a>  {# Assuming you have a URL named 'cartactivity-create' #}
+</div>
+{% endblock %} 
+

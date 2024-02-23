@@ -1,0 +1,12 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}
+    <h2>Create Interaction</h2>
+<form method="post">
+    {% csrf_token %} 
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+<a href="{% url 'interaction-list' %} ">Back to list</a>
+{% endblock %} 
+

@@ -1,0 +1,24 @@
+
+    
+{% extends 'base.html' %} 
+{% block content %} 
+
+<div class="container mt-5">
+    <h1>TaskType Details</h1>
+    <table class="table table-bordered">
+        <tbody>
+        
+            <tr>
+                <th>{model_name} {i_name}</th>
+                <td>{{{{ {model_name.lower()}.{i} }}}}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <!-- Update and Delete Buttons -->
+    <div class="mt-3">
+        <a href="{% url 'tasktype-update' tasktype.pk %}" class="btn btn-primary">Edit TaskType</a>
+        <a href="{% url 'tasktype-delete' tasktype.pk %}" class="btn btn-danger">Delete TaskType</a>
+    </div>
+

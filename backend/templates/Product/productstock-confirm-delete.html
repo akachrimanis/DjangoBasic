@@ -1,0 +1,16 @@
+
+     <!-- productstock-confirm-delete.html -->
+   {% extends 'base.html' %} 
+   {% block content %} 
+
+<div class="container mt-5">
+    <h1>Confirm Deletion</h1>
+    <p>Are you sure you want to delete the productstock with ID { productstock.id }?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'productstock-list' %}" class="btn btn-primary">Cancel</a>
+    </form>
+</div>
+{% endblock %} 
+

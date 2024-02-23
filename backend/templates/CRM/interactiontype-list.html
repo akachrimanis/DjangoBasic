@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>InteractionType List</h2>
+<a href="{%  url 'interactiontype-create' %} ">Create New Interactiontype </a>
+<ul>
+
+    <li>
+        {{ interactiontype.date }} {{ interactiontype.price }}
+        <a href="{%  url 'interactiontype-update' interactiontype.id %} ">Edit</a>
+        <a href="{% url 'interactiontype-delete' interactiontype.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

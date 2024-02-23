@@ -1,0 +1,16 @@
+
+     <!-- interactiontype-confirm-delete.html -->
+   {% extends 'base.html' %} 
+   {% block content %} 
+
+<div class="container mt-5">
+    <h1>Confirm Deletion</h1>
+    <p>Are you sure you want to delete the interactiontype with ID { interactiontype.id }?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'interactiontype-list' %}" class="btn btn-primary">Cancel</a>
+    </form>
+</div>
+{% endblock %} 
+

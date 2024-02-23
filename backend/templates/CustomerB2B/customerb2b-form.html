@@ -1,0 +1,16 @@
+
+   {% extends 'base.html' %} 
+   {% block content %} 
+
+<div class="container mt-5">
+    <h1>{% if customerb2b %}Edit CustomerB2B{% else %}Create CustomerB2B{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'customerb2b-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+    <a href="{% url 'customerb2b-create' %}">Add CustomerB2B</a>  {# Assuming you have a URL named 'customerb2b-create' #}
+</div>
+{% endblock %} 
+

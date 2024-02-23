@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>UserPreference List</h2>
+<a href="{%  url 'userpreference-create' %} ">Create New Userpreference </a>
+<ul>
+
+    <li>
+        {{ userpreference.date }} {{ userpreference.price }}
+        <a href="{%  url 'userpreference-update' userpreference.id %} ">Edit</a>
+        <a href="{% url 'userpreference-delete' userpreference.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

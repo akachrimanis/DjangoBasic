@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>DiscountInvoice List</h2>
+<a href="{%  url 'discountinvoice-create' %} ">Create New Discountinvoice </a>
+<ul>
+
+    <li>
+        {{ discountinvoice.date }} {{ discountinvoice.price }}
+        <a href="{%  url 'discountinvoice-update' discountinvoice.id %} ">Edit</a>
+        <a href="{% url 'discountinvoice-delete' discountinvoice.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

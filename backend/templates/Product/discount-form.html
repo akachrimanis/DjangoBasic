@@ -1,0 +1,16 @@
+
+   {% extends 'base.html' %} 
+   {% block content %} 
+
+<div class="container mt-5">
+    <h1>{% if discount %}Edit Discount{% else %}Create Discount{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'discount-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+    <a href="{% url 'discount-create' %}">Add Discount</a>  {# Assuming you have a URL named 'discount-create' #}
+</div>
+{% endblock %} 
+

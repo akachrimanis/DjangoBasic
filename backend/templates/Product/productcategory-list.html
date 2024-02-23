@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>ProductCategory List</h2>
+<a href="{%  url 'productcategory-create' %} ">Create New Productcategory </a>
+<ul>
+
+    <li>
+        {{ productcategory.date }} {{ productcategory.price }}
+        <a href="{%  url 'productcategory-update' productcategory.id %} ">Edit</a>
+        <a href="{% url 'productcategory-delete' productcategory.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

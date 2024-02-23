@@ -1,0 +1,16 @@
+
+   {% extends 'base.html' %} 
+   {% block content %} 
+
+<div class="container mt-5">
+    <h1>{% if individual %}Edit Individual{% else %}Create Individual{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'individual-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+    <a href="{% url 'individual-create' %}">Add Individual</a>  {# Assuming you have a URL named 'individual-create' #}
+</div>
+{% endblock %} 
+

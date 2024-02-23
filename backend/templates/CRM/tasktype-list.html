@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>TaskType List</h2>
+<a href="{%  url 'tasktype-create' %} ">Create New Tasktype </a>
+<ul>
+
+    <li>
+        {{ tasktype.date }} {{ tasktype.price }}
+        <a href="{%  url 'tasktype-update' tasktype.id %} ">Edit</a>
+        <a href="{% url 'tasktype-delete' tasktype.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

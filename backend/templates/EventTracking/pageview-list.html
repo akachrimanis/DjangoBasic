@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>PageView List</h2>
+<a href="{%  url 'pageview-create' %} ">Create New Pageview </a>
+<ul>
+
+    <li>
+        {{ pageview.date }} {{ pageview.price }}
+        <a href="{%  url 'pageview-update' pageview.id %} ">Edit</a>
+        <a href="{% url 'pageview-delete' pageview.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

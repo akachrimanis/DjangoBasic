@@ -1,0 +1,16 @@
+
+   {% extends 'base.html' %} 
+   {% block content %} 
+
+<div class="container mt-5">
+    <h1>{% if employee %}Edit Employee{% else %}Create Employee{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'employee-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+    <a href="{% url 'employee-create' %}">Add Employee</a>  {# Assuming you have a URL named 'employee-create' #}
+</div>
+{% endblock %} 
+

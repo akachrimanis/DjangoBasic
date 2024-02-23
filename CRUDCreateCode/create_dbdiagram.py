@@ -86,22 +86,30 @@ def list_sheets_xlsx(file_path, config):
         # Print the sheet names
         for sheet_name in sheet_names:
             if sheet_name == "apps":
-                print(sheet_name + "<<---------")
+                #print(sheet_name + "<<---------")
+                pass
             elif sheet_name == "admin":
-                print(sheet_name + "<<---------")
-                
+                #print(sheet_name + "<<---------")
+                pass
             else:
-                print(sheet_name)
-
+                #print(sheet_name)
+                pass
         # Close the workbook
         
         workbook.close()
 list_sheets_xlsx(file_path=config.INPUT_PATH_MODELS, config=config)
 content = ""
 df_append_list = []
+
+
+
+
+
+
 for app_ in config.APP_NAMES:
-    
+
     dataframes = read_excel_sheets(file_path=config.INPUT_PATH_MODELS+ app_ + ".xlsx", sheet_names=config.sheet_names)
+   
     print(f"--------------{app_}----------------")
     content += create_dbdiagram(dataframes, config)[0] + "\n"
     df_append_list.append(create_dbdiagram(dataframes, config)[1])

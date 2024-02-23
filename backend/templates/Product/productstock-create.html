@@ -1,0 +1,12 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}
+    <h2>Create ProductStock</h2>
+<form method="post">
+    {% csrf_token %} 
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+<a href="{% url 'productstock-list' %} ">Back to list</a>
+{% endblock %} 
+

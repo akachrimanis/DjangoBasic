@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>CustomerUserProfileB2C List</h2>
+<a href="{%  url 'customeruserprofileb2c-create' %} ">Create New Customeruserprofileb2c </a>
+<ul>
+
+    <li>
+        {{ customeruserprofileb2c.date }} {{ customeruserprofileb2c.price }}
+        <a href="{%  url 'customeruserprofileb2c-update' customeruserprofileb2c.id %} ">Edit</a>
+        <a href="{% url 'customeruserprofileb2c-delete' customeruserprofileb2c.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

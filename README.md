@@ -181,6 +181,11 @@ python3 manage.py runserver
 
 # Create project with prefilled stuff
 python3 /Users/tkax/dev/aimonetize/Backend/DjangoBasic/CRUDCreateCode/main.py
+
+
+
+python3 manage.py startapp Organisation Product CustomerB2B CustomerB2C Dashdoard CRM EventTracking
+
 ````
 
 ## CRUDCreateCode

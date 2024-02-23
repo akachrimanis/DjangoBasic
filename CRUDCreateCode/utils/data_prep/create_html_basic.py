@@ -3,13 +3,15 @@ def create_list_html(df, model_name):
     # Starting script
     
     def show_variables_in_form(df):
-        form_fields = df[df['forms']=="True"]['Variable'].tolist()
+        form_fields = df[df['forms']==1]['Variable'].tolist()
 
-
+        txt = ""
         for field in form_fields:
             txt += f"{{{{ {model_name.lower()}.{field} }}}} "
             
         return txt
+    
+    
     txt = show_variables_in_form(df)    
 
     html_content = f"""
@@ -134,7 +136,7 @@ def create_detail_html(df, model_name, model_fields):
     def create_fields_list(model_fields):
         txt = ""
         for i in model_fields:
-            i_name = {i.upper()}.replace("_", " ")
+            i_name = i.upper().replace("_", " ")
             txt += """
             <tr>
                 <th>{model_name} {i_name}</th>

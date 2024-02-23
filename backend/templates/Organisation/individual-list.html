@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>Individual List</h2>
+<a href="{%  url 'individual-create' %} ">Create New Individual </a>
+<ul>
+
+    <li>
+        {{ individual.date }} {{ individual.price }}
+        <a href="{%  url 'individual-update' individual.id %} ">Edit</a>
+        <a href="{% url 'individual-delete' individual.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

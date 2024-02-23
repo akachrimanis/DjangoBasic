@@ -1,0 +1,13 @@
+
+    {% extends 'base.html' %} 
+    {% block content %} 
+
+    <h2>Delete DiscountInvoice</h2>
+<p>Are you sure you want to delete "{{ discountinvoice.name }}"?</p>
+<form method="post">
+    {% csrf_token %} 
+    <button type="submit">Yes, delete</button>
+</form>
+<a href="{% url 'discountinvoice-list' %} ">Cancel</a>
+{% endblock %} 
+

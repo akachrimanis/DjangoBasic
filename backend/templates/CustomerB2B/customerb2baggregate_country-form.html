@@ -1,0 +1,16 @@
+
+   {% extends 'base.html' %} 
+   {% block content %} 
+
+<div class="container mt-5">
+    <h1>{% if customerb2baggregate_country %}Edit CustomerB2BAggregate_country{% else %}Create CustomerB2BAggregate_country{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'customerb2baggregate_country-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+    <a href="{% url 'customerb2baggregate_country-create' %}">Add CustomerB2BAggregate_country</a>  {# Assuming you have a URL named 'customerb2baggregate_country-create' #}
+</div>
+{% endblock %} 
+

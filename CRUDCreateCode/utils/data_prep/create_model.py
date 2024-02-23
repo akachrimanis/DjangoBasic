@@ -8,10 +8,10 @@ def create_model(df, model_name):
     print(df.columns.tolist())
     
     print("\n The model's variables are:")
-    print(df[df["filter_use"] == "True"]["Variable"].tolist())
+    print(df[df["filter_use"] == 1]["Variable"].tolist())
     
     
-    df = df[df["filter_use"] == "True"]
+    df = df[df["filter_use"] == 1]
     
     # Starting script
     model_content = f"""from django.db import models

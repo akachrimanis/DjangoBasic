@@ -1,0 +1,16 @@
+
+   {% extends 'base.html' %} 
+   {% block content %} 
+
+<div class="container mt-5">
+    <h1>{% if productcategory %}Edit ProductCategory{% else %}Create ProductCategory{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'productcategory-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+    <a href="{% url 'productcategory-create' %}">Add ProductCategory</a>  {# Assuming you have a URL named 'productcategory-create' #}
+</div>
+{% endblock %} 
+

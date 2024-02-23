@@ -86,19 +86,21 @@ def read_model_settings(CURRENT_MODEL_NAME, config):
     return df_model_setting
 
 
-def create_one_model(CURRENT_MODEL_NAME, df_model_setting, config):
+def create_one_model(CURRENT_MODEL_NAME,CURRENT_APP_NAME, df_model_setting, config):
     print(f"------------------------------------")
     print(f"-------{CURRENT_MODEL_NAME}-----------")
     print(f"-------      Models     -----------")
         
     # Create the text for the models.py file 
     # Create the model parameters and definitions
+    model_names = df_model_setting['model']['model_name'].unique()
+    #for i in model_names:
     model_definitions = create_model(df_model_setting['model'], model_name=CURRENT_MODEL_NAME)
     print(f"\n - The {CURRENT_MODEL_NAME} model's variables are:")
-    print(df_model_setting['model'][df_model_setting['model']["filter_use"] == "True"]["Variable"].tolist())
+    print(df_model_setting['model'][df_model_setting['model']["filter_use"] == 1]["Variable"].tolist())
     
-    #model_fields = df_model_setting['model'][df_model_setting['model']["filter_use"] == "True"]["Variable"].tolist()
-    #df_model_setting['model'] = df_model_setting['model'][df["filter_use"] == "True"]
+    #model_fields = df_model_setting['model'][df_model_setting['model']["filter_use"] == 1]["Variable"].tolist()
+    #df_model_setting['model'] = df_model_setting['model'][df["filter_use"] == 1]
     # create the functionality
     model_functionality = create_functionality(df_model_setting['model_functions'])
     models_py_str = model_definitions + "\n" + model_functionality
@@ -150,7 +152,7 @@ def create_one_forms(CURRENT_MODEL_NAME, df_model_setting, config):
     save_forms_py(forms_py_str, config.BASIC_APP_PATH, CURRENT_MODEL_NAME)
 
 def create_one_html(CURRENT_MODEL_NAME, df_model_setting, config):
-    model_fields = df_model_setting['model'][df_model_setting['model']["filter_use"] == "True"]["Variable"].tolist()
+    model_fields = df_model_setting['model'][df_model_setting['model']["filter_use"] == 1]["Variable"].tolist()
 
     # create html files
     list_html = create_list_html(df_model_setting['model'], CURRENT_MODEL_NAME)

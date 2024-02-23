@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>Payment List</h2>
+<a href="{%  url 'payment-create' %} ">Create New Payment </a>
+<ul>
+
+    <li>
+        {{ payment.date }} {{ payment.price }}
+        <a href="{%  url 'payment-update' payment.id %} ">Edit</a>
+        <a href="{% url 'payment-delete' payment.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+

@@ -1,0 +1,16 @@
+
+   {% extends 'base.html' %} 
+   {% block content %} 
+
+<div class="container mt-5">
+    <h1>{% if payment %}Edit Payment{% else %}Create Payment{% endif %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'payment-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+    <a href="{% url 'payment-create' %}">Add Payment</a>  {# Assuming you have a URL named 'payment-create' #}
+</div>
+{% endblock %} 
+

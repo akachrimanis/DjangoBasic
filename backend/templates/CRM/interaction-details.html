@@ -1,0 +1,39 @@
+
+    
+{% extends 'base.html' %} 
+{% block content %} 
+
+<div class="container mt-5">
+    <h1>Interaction Details</h1>
+    <table class="table table-bordered">
+        <tbody>
+        
+            <tr>
+                <th>{model_name} {i_name}</th>
+                <td>{{{{ {model_name.lower()}.{i} }}}}</td>
+            </tr>
+            
+            <tr>
+                <th>{model_name} {i_name}</th>
+                <td>{{{{ {model_name.lower()}.{i} }}}}</td>
+            </tr>
+            
+            <tr>
+                <th>{model_name} {i_name}</th>
+                <td>{{{{ {model_name.lower()}.{i} }}}}</td>
+            </tr>
+            
+            <tr>
+                <th>{model_name} {i_name}</th>
+                <td>{{{{ {model_name.lower()}.{i} }}}}</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    <!-- Update and Delete Buttons -->
+    <div class="mt-3">
+        <a href="{% url 'interaction-update' interaction.pk %}" class="btn btn-primary">Edit Interaction</a>
+        <a href="{% url 'interaction-delete' interaction.pk %}" class="btn btn-danger">Delete Interaction</a>
+    </div>
+

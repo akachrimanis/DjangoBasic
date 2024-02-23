@@ -1,0 +1,18 @@
+
+    {% extends 'base.html' %} 
+    {% block content %}  
+
+    <h2>CartActivity List</h2>
+<a href="{%  url 'cartactivity-create' %} ">Create New Cartactivity </a>
+<ul>
+
+    <li>
+        {{ cartactivity.date }} {{ cartactivity.price }}
+        <a href="{%  url 'cartactivity-update' cartactivity.id %} ">Edit</a>
+        <a href="{% url 'cartactivity-delete' cartactivity.id %} ">Delete</a>
+    </li>
+    {%  endfor %} 
+</ul>
+{% endblock %} 
+
+
