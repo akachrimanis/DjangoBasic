@@ -84,7 +84,7 @@ class Product(models.Model):
     history = HistoricalRecords() 
 
 class ProductStock(models.Model):
-    product = models.OneToOneField("Product",related_name='product stock',on_delete=models.CASCADE) 
+    product = models.OneToOneField("Product",on_delete=models.CASCADE, related_name='product_stock') 
     quantity = models.PositiveIntegerField() 
     history = HistoricalRecords() 
 
@@ -143,7 +143,7 @@ class Address(models.Model):
  
     
 class Payment(models.Model):
-    order = models.ForeignKey("Order",on_delete=models.CASCADE) 
+    order = models.ForeignKey("Order",on_delete=models.CASCADE, related_name='payments') 
     amount = models.DecimalField(max_digits=10,decimal_places=2) 
     payment_method = models.CharField(max_length=255) 
     payment_status = models.CharField(max_length=255) 
@@ -163,7 +163,7 @@ class Order(models.Model):
     billing_address = models.ForeignKey("Address",related_name='billing_address',on_delete=models.SET_NULL,null=True) 
     created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True) 
-    payment = models.ForeignKey('Payment',on_delete=models.SET_NULL,null=True) 
+    payment = models.ForeignKey('Payment',on_delete=models.SET_NULL,null=True, related_name='orders') 
     history = HistoricalRecords() 
     
 class Review(models.Model):

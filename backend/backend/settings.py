@@ -34,12 +34,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'Dashboard',
-    "CustomerB2B",
-    "CustomerB2C",
-    "CRM",
-    "Product",
-    "EventTracking",
+   
     'django.contrib.sites',
     'django.contrib.flatpages',
     'rest_framework',
@@ -53,7 +48,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_filters',
-    "simple_history"
+    "simple_history",
+     'Dashboard',
+    "CustomerB2B",
+    "CustomerB2C",
+    "CRM",
+    "Product",
+    "EventTracking",
+    "Organisation",
     
 ]
 SITE_ID = 1
@@ -76,8 +78,14 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR,'templates'),
-                 os.path.join(BASE_DIR,'templates','Customer'),
-                 os.path.join(BASE_DIR,'templates','Dashboardtestdata'),
+                 os.path.join(BASE_DIR,'templates','Dashboard'),
+                 os.path.join(BASE_DIR,'templates','CRM'),
+                 os.path.join(BASE_DIR,'templates','CustomerB2B'),
+                 os.path.join(BASE_DIR,'templates','CustomerB2C'),
+                 os.path.join(BASE_DIR,'templates','Product'),
+                 os.path.join(BASE_DIR,'templates','EventTracking'),
+                 os.path.join(BASE_DIR,'templates','Organisation'),
+
                  ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -87,6 +95,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+
         },
     },
 ]

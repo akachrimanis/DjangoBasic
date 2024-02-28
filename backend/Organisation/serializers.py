@@ -20,12 +20,12 @@ class IndividualSerializer(serializers.ModelSerializer):
         
         
 from rest_framework import serializers
-from .models import Organization
+from .models import Organisation
 
-class OrganizationSerializer(serializers.ModelSerializer):
+class OrganisationSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Organization
+        model = Organisation
         fields = "__all__"
         
         

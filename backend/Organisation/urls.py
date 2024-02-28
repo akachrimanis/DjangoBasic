@@ -6,7 +6,7 @@ from . import views
 router = DefaultRouter()
 router.register(r'employees', views.EmployeeViewSet)
 router.register(r'individuals', views.IndividualViewSet)
-router.register(r'organizations', views.OrganizationViewSet)
+router.register(r'organisations', views.OrganisationViewSet)
 router.register(r'managers', views.ManagerViewSet)
 router.register(r'employers', views.EmployerViewSet)
 urlpatterns = [
@@ -36,12 +36,12 @@ urlpatterns = [
 
 
 
-    # organizations
-    path('', views.OrganizationListView.as_view(), name='organization-list'),
-    path('create/', views.OrganizationCreateView.as_view(), name='organization-create'),
-    path('update/<int:pk>/', views.OrganizationUpdateView.as_view(), name='organization-update'),
-    path('delete/<int:pk>/', views.OrganizationDeleteView.as_view(), name='organization-delete'),
-    path('<int:pk>/', views.OrganizationListView.as_view(), name='organization-detail'),
+    # Organisations
+    path('', views.OrganisationListView.as_view(), name='Organisation-list'),
+    path('create/', views.OrganisationCreateView.as_view(), name='Organisation-create'),
+    path('update/<int:pk>/', views.OrganisationUpdateView.as_view(), name='Organisation-update'),
+    path('delete/<int:pk>/', views.OrganisationDeleteView.as_view(), name='Organisation-delete'),
+    path('<int:pk>/', views.OrganisationListView.as_view(), name='Organisation-detail'),
 
 
 

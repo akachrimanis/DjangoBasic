@@ -166,6 +166,7 @@ pip install pandas openpyxl numpy jupyterlab django-simple-history
 pip install celery django-debug-toolbar django-allauth django-cors-headers django-filter django-crispy-forms djangorestframework-simplejwt
 pip install channels redis # asynchronous/ websockets
 pip install openai
+pip install scrapy
 
 
 django-admin startproject backend

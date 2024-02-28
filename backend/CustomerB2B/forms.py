@@ -31,7 +31,7 @@ from .models import CustomerB2BAggregate_country
 class CustomerB2BAggregate_countryForm(forms.ModelForm):
     class Meta:
         model = CustomerB2BAggregate_country
-        fields = ['country ', 'total_customers ', 'total_annual_revenue ', 'total_industries ', 'total_company_size ']
+        fields = ['country', 'total_customers', 'total_annual_revenue', 'total_industries', 'total_company_size']
         # Add any other fields that you have in your Customer model
 
 

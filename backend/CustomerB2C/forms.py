@@ -19,7 +19,7 @@ from .models import CustomerUserProfileB2C
 class CustomerUserProfileB2CForm(forms.ModelForm):
     class Meta:
         model = CustomerUserProfileB2C
-        fields = ['firstname', 'surname', 'email', 'phone', 'last_login']
+        fields = ['firstname', 'surname', 'email', 'phone']
         # Add any other fields that you have in your Customer model
 
 

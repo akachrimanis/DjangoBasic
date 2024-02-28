@@ -8,9 +8,9 @@ def home(request):
     return render(request, "home.html",{})
 
 
-from .models import Employee, Individual, Organization, Manager, Employer
-from .forms import EmployeeForm, IndividualForm, OrganizationForm, ManagerForm, EmployerForm
-from .serializers import EmployeeSerializer, IndividualSerializer, OrganizationSerializer, ManagerSerializer, EmployerSerializer
+from .models import Employee, Individual, Organisation, Manager, Employer
+from .forms import EmployeeForm, IndividualForm, OrganisationForm, ManagerForm, EmployerForm
+from .serializers import EmployeeSerializer, IndividualSerializer, OrganisationSerializer, ManagerSerializer, EmployerSerializer
 
 class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
@@ -80,37 +80,37 @@ class IndividualDeleteView(DeleteView):
    
     
 
-class OrganizationViewSet(viewsets.ModelViewSet):
-    queryset = Organization.objects.all()
-    serializer_class = OrganizationSerializer
+class OrganisationViewSet(viewsets.ModelViewSet):
+    queryset = Organisation.objects.all()
+    serializer_class = OrganisationSerializer
     
-     # Organization Views  
-class OrganizationListView(ListView):
-    model = Organization
-    template_name = 'organization-list.html'
-    context_object_name = 'organizations'
+     # Organisation Views  
+class OrganisationListView(ListView):
+    model = Organisation
+    template_name = 'Organisation-list.html'
+    context_object_name = 'Organisations'
     
-class OrganizationDetailView(DetailView):
-    model = Organization
-    template_name = 'organization-details.html'
-    context_object_name = 'organizations'
+class OrganisationDetailView(DetailView):
+    model = Organisation
+    template_name = 'Organisation-details.html'
+    context_object_name = 'Organisations'
 
-class OrganizationCreateView(CreateView):
-    model = Organization
-    form_class = OrganizationForm
-    template_name = 'organization-form.html'
-    success_url = reverse_lazy('organization-list')  # Redirect to the CRUD view after successful creation
+class OrganisationCreateView(CreateView):
+    model = Organisation
+    form_class = OrganisationForm
+    template_name = 'Organisation-form.html'
+    success_url = reverse_lazy('Organisation-list')  # Redirect to the CRUD view after successful creation
 
-class OrganizationUpdateView(UpdateView):
-    model = Organization
-    form_class = OrganizationForm
-    template_name = 'organization-form.html'
-    success_url = reverse_lazy('organization-list')  # Redirect to the CRUD view after successful update
+class OrganisationUpdateView(UpdateView):
+    model = Organisation
+    form_class = OrganisationForm
+    template_name = 'Organisation-form.html'
+    success_url = reverse_lazy('Organisation-list')  # Redirect to the CRUD view after successful update
 
-class OrganizationDeleteView(DeleteView):
-    model = Organization
-    template_name = 'organization-confirm-delete.html'
-    success_url = reverse_lazy('organization-list')  # Redirect to the CRUD view after successful deletion
+class OrganisationDeleteView(DeleteView):
+    model = Organisation
+    template_name = 'Organisation-confirm-delete.html'
+    success_url = reverse_lazy('Organisation-list')  # Redirect to the CRUD view after successful deletion
    
     
 

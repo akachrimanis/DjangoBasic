@@ -19,19 +19,19 @@ from .models import Individual
 class IndividualForm(forms.ModelForm):
     class Meta:
         model = Individual
-        fields = ['user', 'employee', 'history']
+        fields = ['user', 'employee',]
         # Add any other fields that you have in your Customer model
 
 
-from .serializers import OrganizationSerializer
-from .models import Organization
+from .serializers import OrganisationSerializer
+from .models import Organisation
 
 
 
-class OrganizationForm(forms.ModelForm):
+class OrganisationForm(forms.ModelForm):
     class Meta:
-        model = Organization
-        fields = ['name', 'address', 'history']
+        model = Organisation
+        fields = ['name', 'address']
         # Add any other fields that you have in your Customer model
 
 
@@ -55,7 +55,7 @@ from .models import Employer
 class EmployerForm(forms.ModelForm):
     class Meta:
         model = Employer
-        fields = ['name', 'email', 'password', 'company_name', 'organization', 'history']
+        fields = ['name', 'email', 'password', 'company_name', 'organization']
         # Add any other fields that you have in your Customer model
 
 

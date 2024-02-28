@@ -55,4 +55,4 @@ def get_apps_names(config):
     except Exception as e:
         print(f"Error: {e}")
     return model_names
-
+ 

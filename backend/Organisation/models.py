@@ -18,9 +18,9 @@ class Employee(models.Model):
     address = models.CharField(max_length=200) 
     department = models.CharField(max_length=100) 
     role = models.CharField(max_length=100) 
-    employer = models.ForeignKey(Employer,on_delete=models.CASCADE) 
+    employer = models.ForeignKey("Employer",on_delete=models.CASCADE) 
     manager = models.ForeignKey('Manager',on_delete=models.SET_NULL,null=True,related_name='managed_employees') 
-    organization = models.ForeignKey(Organization,on_delete=models.CASCADE) 
+    organization = models.ForeignKey("Organisation",on_delete=models.CASCADE) 
 
     def __str__(self):
         return f"{self.first_name} {self.surname}"
@@ -43,7 +43,7 @@ class Individual(models.Model):
         verbose_name_plural = 'Individuals'
 
 
-class Organization(models.Model):
+class Organisation(models.Model):
     name = models.CharField(max_length=100) 
     address = models.CharField(max_length=200) 
     history = HistoricalRecords() 
@@ -58,8 +58,8 @@ class Manager(models.Model):
     address = models.CharField(max_length=200) 
     department = models.CharField(max_length=100) 
     role = models.CharField(max_length=100) 
-    employer = models.ForeignKey(Employer,on_delete=models.CASCADE) 
-    organization = models.ForeignKey(Organization,on_delete=models.CASCADE) 
+    employer = models.ForeignKey("Employer",on_delete=models.CASCADE) 
+    organization = models.ForeignKey("Organisation",on_delete=models.CASCADE) 
 
     def __str__(self):
         return f"{self.first_name} {self.surname}"
@@ -74,7 +74,7 @@ class Employer(models.Model):
     email = models.EmailField(unique=True) 
     password = models.CharField(max_length=100) 
     company_name = models.CharField(max_length=100) 
-    organization = models.ForeignKey(Organization,on_delete=models.CASCADE) 
+    organization = models.ForeignKey("Organisation",on_delete=models.CASCADE) 
     history = HistoricalRecords() 
     created_at = models.DateTimeField(auto_now_add=True) 
     updated_at = models.DateTimeField(auto_now=True) 

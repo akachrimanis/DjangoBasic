@@ -19,7 +19,7 @@ class CustomerB2BViewSet(viewsets.ModelViewSet):
      # CustomerB2B Views  
 class CustomerB2BListView(ListView):
     model = CustomerB2B
-    template_name = 'customerb2b-list.html'
+    template_name = 'customerb2b-list2.html'
     context_object_name = 'customerb2bs'
     
 class CustomerB2BDetailView(DetailView):
@@ -31,7 +31,9 @@ class CustomerB2BCreateView(CreateView):
     model = CustomerB2B
     form_class = CustomerB2BForm
     template_name = 'customerb2b-form.html'
-    success_url = reverse_lazy('customerb2b-list')  # Redirect to the CRUD view after successful creation
+    #success_url = reverse_lazy('customerb2b-list')  # Redirect to the CRUD view after successful creation
+    def get_success_url(self):
+        return reverse_lazy('customerb2b-list2')  # Redirect to another list view after successful creation
 
 class CustomerB2BUpdateView(UpdateView):
     model = CustomerB2B

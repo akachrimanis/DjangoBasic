@@ -1,0 +1,30 @@
+
+    {% extends 'base.html' %} 
+    {% load customer_filter %}
+
+    {% block content %}  
+
+  
+<a href="{% url 'customerb2b-create' %}">Create New CustomerB2B</a>  <!-- Link to the create view -->
+
+<table>
+  <thead>
+    <tr>
+      {% for field in object_list.0|get_fields %}
+      <th>{{ field.verbose_name }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for customerb2b in object_list %}
+    <tr>
+      {% for field in customerb2b|get_fields %}
+      <td>{{ field.value }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %} 
+
+

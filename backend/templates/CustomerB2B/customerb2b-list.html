@@ -2,17 +2,27 @@
     {% extends 'base.html' %} 
     {% block content %}  
 
-    <h2>CustomerB2B List</h2>
-<a href="{%  url 'customerb2b-create' %} ">Create New Customerb2b </a>
-<ul>
+  
+<a href="{% url 'customerb2b-create' %}">Create New CustomerB2B</a>  <!-- Link to the create view -->
 
-    <li>
-        {{ customerb2b.date }} {{ customerb2b.price }}
-        <a href="{%  url 'customerb2b-update' customerb2b.id %} ">Edit</a>
-        <a href="{% url 'customerb2b-delete' customerb2b.id %} ">Delete</a>
-    </li>
-    {%  endfor %} 
-</ul>
+<table>
+  <thead>
+    <tr>
+      {% for field in object_list.0|get_fields %}
+      <th>{{ field.verbose_name }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for customerb2b in object_list %}
+    <tr>
+      {% for field in customerb2b|get_fields %}
+      <td>{{ field.value }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
 {% endblock %} 
 
 

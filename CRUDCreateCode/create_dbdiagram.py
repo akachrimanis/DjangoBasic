@@ -81,21 +81,6 @@ def list_sheets_xlsx(file_path, config):
         workbook = openpyxl.load_workbook(file_path + app_ + ".xlsx")
 
         # Get the sheet names
-        sheet_names = workbook.sheetnames
-
-        # Print the sheet names
-        for sheet_name in sheet_names:
-            if sheet_name == "apps":
-                #print(sheet_name + "<<---------")
-                pass
-            elif sheet_name == "admin":
-                #print(sheet_name + "<<---------")
-                pass
-            else:
-                #print(sheet_name)
-                pass
-        # Close the workbook
-        
         workbook.close()
 list_sheets_xlsx(file_path=config.INPUT_PATH_MODELS, config=config)
 content = ""
