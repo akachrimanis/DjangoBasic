@@ -1,0 +1,19 @@
+passphrase.txt
+logs/
+.git
+*.md
+.cache
+
+
+# Ignore compiled Python bytecode files
+*.pyc
+
+# Ignore version control system directories
+.svn
+
+# Ignore Docker-specific files
+Dockerfile
+docker-compose.yml
+
+# Ignore development and testing directories
+tests/
