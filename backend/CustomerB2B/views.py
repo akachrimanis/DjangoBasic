@@ -148,4 +148,3 @@ class CustomerUserProfileB2BDeleteView(DeleteView):
     template_name = 'customeruserprofileb2b-confirm-delete.html'
     success_url = reverse_lazy('customeruserprofileb2b-list')  # Redirect to the CRUD view after successful deletion
    
-    

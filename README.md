@@ -167,7 +167,7 @@ pip install celery django-debug-toolbar django-allauth django-cors-headers djang
 pip install channels redis # asynchronous/ websockets
 pip install openai
 pip install scrapy
-
+pip install redis celery  
 
 django-admin startproject backend
 python3 manage.py startapp Customer
@@ -296,3 +296,21 @@ Serializers is a straightforward function that peety much stays teh same across 
 
 
 
+# Docker install + Celery
+[Building a Django Docker Container](https://www.youtube.com/watch?v=PkynrL1aU9o&list=PLOLrQ9Pn6cayGytG1fgUPEsUp3Onol8V7&index=3)
+
+````
+chmod +x ./entrypoint.sh
+docker-compose up -d --build 
+./ manage.py start app taskapp
+docker exec -it django /bin/sh
+./ manage.py start app cworker
+
+````
+
+- Create the celery structure and files either as an app within teh django project or as a standalone app
+- create task routing
+- cretae task prioritization
+- celery task grouping
+- celery task chaining
+- celery task rate limits
