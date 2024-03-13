@@ -30,10 +30,43 @@ def create_views(df, model_name):
     
     views_class = f"""\n
 class {model_name}ViewSet(viewsets.ModelViewSet):
-    queryset = {model_name}.objects.all()
-    serializer_class = {model_name}Serializer
-    
-     # {model_name} Views  
+    #queryset = {model_name}.objects.all()
+    #serializer_class = {model_name}Serializer()
+
+    def list(self, request): #/api/model
+        {model_name.lower()}s = {model_name}.objects.all()
+        serializer = {model_name}Serializer({model_name.lower()}s, many=True)
+        return Response(serializer.data)
+
+
+    def create(self, request):#/api/model
+        serializer = {model_name}Serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        publish('{model_name.lower()}.created', serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+    def retrieve(self, request, pk=None):#/api/model/<str:id>
+        {model_name.lower()} = {model_name}.objects.all(id=pk)
+        serializer = {model_name}Serializer({model_name.lower()})
+        return Response(serializer.data)
+
+    def update(self, request, pk=None):#/api/model/<str:id>
+        {model_name.lower()} = {model_name}.objects.all(id=pk)
+        serializer = {model_name}Serializer(instance={model_name.lower()}, data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        publish('{model_name.lower()}.created', serializer.data)
+        return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+    def destroy(self, request, pk=None):#/api/model/<str:id>
+        {model_name.lower()} = {model_name}.objects.all(id=pk)
+        {model_name.lower()}.delete()
+        publish('{model_name.lower()}.created', serializer.data)
+        return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
+
+# {model_name} Views  
 class {model_name}ListView(ListView):
     model = {model_name}
     template_name = '{model_name.lower()}-list.html'
@@ -87,6 +120,9 @@ for app_name in app_names:
     df = loaded_data['model'][loaded_data['model']["app_name"]==app_name]
     views_main_imports = f"""from rest_framework import viewsets
 from rest_framework import generics
+from rest_framework.response import Response
+from rest_framework.status import status
+
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView, DetailView

@@ -23,15 +23,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     #path('customer/', include('Customer.urls')),  # Include your app's URLs here
     #path('dashboard/', include('Dashboardtestdata.urls')),  # Include your app's URLs here
+    path('products/', include('product.urls')),  # Include your app's URLs here    
+
     path('product/', include('Product.urls')),  # Include your app's URLs here    
     path('CustomerB2B/', include('CustomerB2B.urls')),  # Include your app's URLs here
     path('CustomerB2C/', include('CustomerB2C.urls')),  # Include your app's URLs here
     path('Organisation/', include('Organisation.urls')),  # Include your app's URLs here
     path('EventTracking/', include('CustomerB2C.urls')),  # Include your app's URLs here
     path('CRM/', include('CRM.urls')),  # Include your app's URLs here
-
-
-
 
 ]
 if settings.DEBUG:

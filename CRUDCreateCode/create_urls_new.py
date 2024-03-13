@@ -5,10 +5,17 @@ def create_urls(df, model_name):
 
     # Starting script
     urls_content = f"""
-
-
-
     # {model_name.lower()}s
+    path('{model_name}', views.{model_name}ViewSet.as_view({
+        'get': 'list',
+        'post': 'create'
+        })),
+    path('{model_name}/<str: pk>', views.{model_name}ViewSet.as_view({
+        'get': 'retrieve',
+        'put': 'update',
+        'delete': 'destroy'
+
+    })),
     path('', views.{model_name}ListView.as_view(), name='{model_name.lower()}-list'),
     path('create/', views.{model_name}CreateView.as_view(), name='{model_name.lower()}-create'),
     path('update/<int:pk>/', views.{model_name}UpdateView.as_view(), name='{model_name.lower()}-update'),

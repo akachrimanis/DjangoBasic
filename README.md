@@ -169,6 +169,11 @@ pip install openai
 pip install scrapy
 pip install redis celery  
 
+# flask app requirements
+pip install flask requests SQLAlchemy pika Flask-Migrate mysqlclient Flask-Cors Flask-Scripts 
+pip install -U Flask-SQLAlchemy
+pip install -U flask-cors
+
 django-admin startproject backend
 python3 manage.py startapp Customer
 python3 manage.py migrate
